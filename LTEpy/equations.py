@@ -1,5 +1,6 @@
 import abc
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 from constants import *
@@ -28,7 +29,7 @@ class Planck(_LTE):
         
         """
 
-        spec_intensity_nu = (2 * HPLANCK * nu**3 / SPLC) / (np.exp(HPLANCK * nu / (KBOLTZ * self.temp)) - 1)
+        spec_intensity_nu = (2 * HPLANCK * nu**3 / SPLC**2) / (np.exp(HPLANCK * nu / (KBOLTZ * self.temp)) - 1)
 
         return spec_intensity_nu
     
@@ -41,8 +42,31 @@ class Planck(_LTE):
 
         return spec_intensity_lamb
     
-    
 
+    def plot_B_nu(self, nu_1, nu_2, N_nu=500, lw=1, **kwargs):
+        """
+        
+        """
+
+        nus = np.linspace(nu_1, nu_2, N_nu)
+
+        fig, ax = plt.subplots()
+        ax.plot(nus, self.compute_B_nu(nus), lw=lw, **kwargs)
+        
+        plt.show()
+
+
+    def plot_B_lambda(self, wl_1, wl_2, N_wl=500, lw=1, **kwargs):
+        """
+        
+        """
+
+        wls = np.linspace(wl_1, wl_2, N_wl)
+
+        fig, ax = plt.subplots()
+        ax.plot(wls, self.compute_B_lambda(wls), lw=lw, **kwargs)
+        
+        plt.show()
 
 
 
