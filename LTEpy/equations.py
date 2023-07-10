@@ -1,7 +1,7 @@
 import abc
 import numpy as np
 
-from constants import KBOLTZ, 
+from constants import KBOLTZ
 
 class _LTE(abc.ABC):
     """
@@ -113,38 +113,8 @@ class Boltzmann_Gibbs(_LTE):
         
 
     
-    
         
 
-class Atom():
-    """ Class for storing energy levels and degeneracies for a given atom.
-    
-    """
-
-    def __init__(self, name, degen, energy):
-        """ 
-        Parameters
-        ----------
-        name : str
-            name of atom
-        degen : dict
-            degeneracies
-        elevels : dict
-            energy levels
-        
-        """
-        self.name = name
-        self.degen = degen
-        self.energy = energy
-
-        if levels is None:
-            levels = np.arange(1,len(degen))
-
-        self.levels = levels
-
-
-    def add_level(self, degen, energy, level):
-        pass 
 
 
 
