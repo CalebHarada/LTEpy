@@ -1,7 +1,7 @@
 import abc
 import numpy as np
 
-import constants
+from constants import KBOLTZ, 
 
 class _LTE(abc.ABC):
     """
@@ -29,28 +29,63 @@ class Boltzmann_Gibbs(_LTE):
     levels of a given atom.
     
     """ 
-    def __init__(self, temp, atom, lev1, lev2):
+    def __init__(self, temp, atom, levii, levjj):
         """ Initialize
+
+        Parameters
+        ----------
+        temp : scalar
+            Temperature in K
+        atom : equations.Atom Object
+            Atom
+        levii : integer
+            First energy level, i. Must be included in atom.levels
+        levjj : integer
+            Second energy level, j. Must be included in atom.levels
+
 
         """
         self.temp = temp
         self.atom = atom
-        self.lev1 = lev1
-        self.lev2 = lev2
+        self.levii = levii
+        self.levjj = levjj
 
-    def pipi(self):
-        """ Calculate probability ratio p_i/p_j between energy levels i and j
+        # ---- Parameters from atom
+        ii = atom.levels.index(levii)
+        jj = atom.levels.index(levjj)
+        self.ii = ii
+        self.jj = jj
+
+        self.gii = atom.degen(ii)
+        self.gjj = atom.degen(jj)
+
+        self.Eii = atom.energy(ii)
+        self.Ejj = atom.energy(jj)
+
+        # ---- Derived and internal parameters
+        self._pipj = None
+
+    @property
+    def _pipj(self):
+        """ Calculate probability ratio of probabilities p_i/p_j between energy levels i and j.
      
 
         p_i/p_j = exp[(E_j - E_i)/kT]
         """
+        if self._pipj is None:
+            deltaE = self.Ejj - self.Eii
+            pipj = np.exp(deltaE/KBOLTZ/self.temp)
+            self._pipj = pipj
+
+        return self._pipj
+
+    def _ninj(self):
+        """ Calculate the ratio of number densities n_i/n_j between energy levels i and j.
+        
+        """
         atom = self.atom
-        ii = atom.levels.index(self.levi)
-        jj = atom.levels.index(self.levj)
 
-        deltaE = atom.energy[ii] - atom.energy[jj] 
 
-        pipj = np.exp(deltaE/constants.)
 
 
         
@@ -59,7 +94,7 @@ class Boltzmann_Gibbs(_LTE):
     
         
 
-class atom():
+class Atom():
     """ Class for storing energy levels and degeneracies for a given atom.
     
     """
