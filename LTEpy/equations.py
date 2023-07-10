@@ -18,6 +18,11 @@ class Planck(_LTE):
     
     """
 
+    def __init__(self, temp):
+        super().__init__(temp)
+
+        self.temp = temp
+
 
 class Maxwell_Boltzmann(_LTE):
     """ 
