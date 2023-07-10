@@ -1,9 +1,7 @@
 import abc
 import numpy as np
 
-
 import constants
-
 
 class _LTE(abc.ABC):
     """
@@ -12,6 +10,8 @@ class _LTE(abc.ABC):
 
     def __init__(self, temp):
         self.temp = temp
+
+
 
 class Planck(_LTE):
     """ 
@@ -25,26 +25,54 @@ class Maxwell_Boltzmann(_LTE):
     """
 
 class Boltzmann_Gibbs(_LTE): 
-    """ 
+    """ Class for calculating Boltzmann Distribution (aka Gibbs Distribution) for two energy 
+    levels of a given atom.
     
     """ 
-    def __init__(self, temp, atom1, atom2):
+    def __init__(self, temp, atom, lev1, lev2):
+        """ Initialize
+
+        """
+        self.temp = temp
+        self.atom = atom
+        self.lev1 = lev1
+        self.lev2 = lev2
+
+    def pipi(self):
+        """ Calculate probability ratio p_i/p_j between energy levels i and j
+     
+
+        p_i/p_j = exp[(E_j - E_i)/kT]
+        """
+        atom = self.atom
+        ii = atom.levels.index(self.levi)
+        jj = atom.levels.index(self.levj)
+
+        deltaE = atom.energy[ii] - atom.energy[jj] 
+
+        pipj = np.exp(deltaE/constants.)
+
+
+        
+
+    
     
         
 
 class atom():
-    """
+    """ Class for storing energy levels and degeneracies for a given atom.
     
     """
-    def __init__(self, name, degen, energy, levels=None):
+
+    def __init__(self, name, degen, energy):
         """ 
         Parameters
         ----------
         name : str
-
-        degen : arraylike
+            name of atom
+        degen : dict
             degeneracies
-        elevels : arraylike
+        elevels : dict
             energy levels
         
         """
