@@ -2,7 +2,7 @@ import abc
 import numpy as np
 
 
-import constants
+from constants import *
 
 
 class _LTE(abc.ABC):
@@ -23,6 +23,32 @@ class Planck(_LTE):
 
         self.temp = temp
 
+    def compute_B_nu(self, nu):
+        """
+        
+        """
+
+        spec_intensity_nu = (2 * HPLANCK * nu**3 / SPLC) / (np.exp(HPLANCK * nu / (KBOLTZ * self.temp)) - 1)
+
+        return spec_intensity_nu
+    
+    def compute_B_lambda(self, wl):
+        """
+        
+        """
+
+        spec_intensity_lamb = (2 * HPLANCK * SPLC**2 / wl**5) / (np.exp(HPLANCK * SPLC / (wl * KBOLTZ * self.temp)) - 1)
+
+        return spec_intensity_lamb
+    
+    
+
+
+
+
+
+
+
 
 class Maxwell_Boltzmann(_LTE):
     """ 
@@ -33,7 +59,7 @@ class Boltzmann_Gibbs(_LTE):
     """ 
     
     """ 
-    def __init__(self, temp, atom1, atom2):
+    #def __init__(self, temp, atom1, atom2):
     
         
 
