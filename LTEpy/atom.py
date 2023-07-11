@@ -29,10 +29,28 @@ class Atom():
             levels = np.arange(1,len(gdegen))
 
         self.levels = levels
+    
+    def boltzmann_factor(self, levii, temp):
+        """ Calculate the Boltzmann factor for a given energy level.
+        
+        Parameters
+        ----------
+        levii : int
+            Energy level, ii. Must be included in levels
+        temp : arraylike
+            
 
+        Returns
+        -------
+        boltzfact : scalar
+            Boltzmann factor, proportional to the probability of being in state ii
 
-    def add_level(self, gdegen, energy, level):
-        raise NotImplementedError("'add_level' is not yet implemented")
+        """
+        ii = list(self.levels).index(levii)
+        Eii = self.energy[ii]
+
+        boltzfact = np.exp(-Eii/KBOLTZ/temp)
+
 
 class Hydrogen(Atom):
     """ Class for a hydrogen atom, including hydrogen-specific energy level functions.
@@ -80,10 +98,3 @@ class Hydrogen(Atom):
         self.gdegen=gdegen
         return gdegen
 
-    
-    def partition_function():
-        """ Calculate the 
-        
-        
-        """
-        raise NotImplementedError("'partition_function() not yet implemented")
