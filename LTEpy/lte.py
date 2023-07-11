@@ -206,7 +206,7 @@ class Boltzmann_Factor(_LTE):
         """
         if self.bfact is None:
             atom = self.atom
-            bfact = np.zeros_like(atom.levels)
+            bfact = np.zeros_like(atom.levels, dtype=float)
             for ii, lev in enumerate(atom.levels):
                 energy = atom.energy[ii]
                 bfact[ii] = np.float64(np.exp(-(energy)/KBOLTZ/self.temp))
