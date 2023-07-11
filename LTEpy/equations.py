@@ -73,7 +73,7 @@ class Boltzmann_Factor(_LTE):
         ax.plot(xx, yy)
         ax.set_xlabel('Energy Level, $n$')
         ax.set_ylabel('Boltzmann Factor, $\exp(-E_n/kT)$')
-        ax.set_xscale('log')
+        # ax.set_xscale('log')
         ax.set_yscale('log')
 
 
