@@ -45,49 +45,37 @@ class Boltzmann_Factor(_LTE):
         self.atom = atom
 
 
-        # These values are calculated as needed by the class when the corresponding methods are called
-        # self._pipj = None          #: Probability ratio of ith to jth energy levels
-        # self._deltaE = None        #: Difference between ith and jth energy levels)
-        
-
-    # @property
-    # def _deltaE(self):
-    #     """ Calculate the difference between energy levels.
-        
-    #     """
-    #     if self._deltaE is None:
-    #         deltaE = self.Ejj - self.Eii
-    #         self._deltaE = deltaE
-
-    #     return self._deltaE
-
-    def _pipj(self):
+    def boltzmann_factor(self):
         """ Calculate probability ratio of probabilities p_i/p_j between energy levels i and j.
      
 
         p_i/p_j = exp[(E_j - E_i)/kT]
         """
-        pipj = np.exp(-(self.Eii - self.Ejj)
-                        /KBOLTZ/self.temp)
-        self._pipj = pipj
+        if self.bfact is None:
+            atom = self.atom
+            bfact = np.zeros_like(atom.levels)
+            for ii, lev in enumerate(atom.levels):
+                energy = atom.energy[ii]
+                bfact[ii] = np.exp(-energy/KBOLTZ/self.temp)
+        self.bfact = bfact
 
-        return self._pipj
+        return self.bfact
 
 
-    def ninj(self):
-        """ Calculate the ratio of number densities n_i/n_j between energy levels i and j
-        from the probability ratio and degeneracies.
+    # def ninj(self):
+    #     """ Calculate the ratio of number densities n_i/n_j between energy levels i and j
+    #     from the probability ratio and degeneracies.
         
         
-        n_i/n_j = (g_1/g_2) * exp[(E_j - E_i)/kT] = (g_1/g_2) * (p_i/p_j)
-        """
+    #     n_i/n_j = (g_1/g_2) * exp[(E_j - E_i)/kT] = (g_1/g_2) * (p_i/p_j)
+    #     """
 
-        atom = self.atom
-        gigj = self.gii / self.gjj
-        pipj = self._pipj()
-        self.ninj = gigj * pipj
+    #     atom = self.atom
+    #     gigj = self.gii / self.gjj
+    #     pipj = self._pipj()
+    #     self.ninj = gigj * pipj
 
-        return self.ninj
+    #     return self.ninj
 
 
 
