@@ -63,7 +63,7 @@ class Boltzmann_Gibbs(_LTE):
         self.Ejj = atom.energy[jj]
 
         # These values are calculated as needed by the class when the corresponding methods are called
-        self._pipj = None          #: Probability ratio of ith to jth energy levels
+        # self._pipj = None          #: Probability ratio of ith to jth energy levels
         # self._deltaE = None        #: Difference between ith and jth energy levels)
         
 
@@ -78,17 +78,15 @@ class Boltzmann_Gibbs(_LTE):
 
     #     return self._deltaE
 
-    @property
     def _pipj(self):
         """ Calculate probability ratio of probabilities p_i/p_j between energy levels i and j.
      
 
         p_i/p_j = exp[(E_j - E_i)/kT]
         """
-        if self._pipj is None:
-            pipj = np.exp(-(self.Eii - self.Ejj)
-                          /KBOLTZ/self.temp)
-            self._pipj = pipj
+        pipj = np.exp(-(self.Eii - self.Ejj)
+                        /KBOLTZ/self.temp)
+        self._pipj = pipj
 
         return self._pipj
 
@@ -103,8 +101,7 @@ class Boltzmann_Gibbs(_LTE):
 
         atom = self.atom
         gigj = self.gii / self.gjj
-        pipj = self._pipj
-        print(f"{type(gigj)=}, {type(pipj)=}")
+        pipj = self._pipj()
         self.ninj = gigj * pipj
 
         return self.ninj
