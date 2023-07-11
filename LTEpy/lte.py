@@ -170,9 +170,105 @@ class Planck(_LTE):
 
 
 class Maxwell_Boltzmann(_LTE):
-    """ 
+    """ Class for computing the Maxwell Boltzmann distribution for a given particle and temperature
     
     """
+
+    def __init__(self, temp, mass):
+        """ Initialize
+
+        Parameters
+        ----------
+        temp : scalar
+            Temperature in K
+        mass : scale
+            Particle mass in AMU
+
+        """
+
+        super().__init__(temp)
+
+        self.temp = temp
+        self.mass = mass
+
+
+    def set_mass(self, mass):
+        """Helper function to set the mass of the particle
+
+        Parameters
+        ----------
+        mass : scalar
+            Particle mass in AMU
+        
+        """
+
+        self.mass = mass
+
+
+    def set_temp(self, temp):
+        """Set the temperature of this Planck object
+
+        Parameters
+        ----------
+        temp : scalar
+            temperature in Kelvin
+        
+        """
+
+        self.temp = temp
+    
+
+    def compute_maxwell_boltzmann(self, speed):
+        """ Calculate the probability density function of a given speed for a particle of given mass
+
+        Parameters
+        ----------
+        speed : scalar
+            particle speed in cm/s
+
+        
+        f(v) = (m / 2*pi*k*T)^1.5 * 4*pi*v^2 * exp[-m*v^2 / (2*k*T)]
+        
+        """
+
+        mass = self.mass * AMU
+
+        f_v = 4 * np.pi * speed**2 * (mass / (2 * np.pi * KBOLTZ * self.temp))**1.5 * np.exp(-mass * speed**2 / (2 * KBOLTZ * self.temp))
+
+        return f_v
+    
+    
+    def plot_fv(self, speed_1, speed_2, N_speed=500, lw=1, ax=None, **kwargs):
+        """ Plot specific intensity B_nu between two frequencies
+        
+        Parameters
+        ----------
+        speed_1 : scalar
+            first speed in cm/s
+        speed_2 : scalar
+            second speed in cm/s
+        N_speed : scalar
+            number of speed points to plot
+        lw : scalar
+            line width for plotting
+        ax : matplotlib axis object
+            option to choose which axis to plot on
+        
+        """
+
+        speeds = np.linspace(speed_1, speed_2, N_speed)  # define speed array
+
+        if not ax:
+            fig, ax = plt.subplots()
+
+        ax.plot(speeds, self.compute_maxwell_boltzmann(speeds), lw=lw, **kwargs)
+        ax.set_xlabel("Speed (cm s$^{-1}$)")
+        ax.set_ylabel("Probability density (s cm$^{-1}$)")
+        
+        if not ax:
+            return fig, ax
+
+
 
 class Boltzmann_Factor(_LTE): 
     """ Class for calculating Boltzmann Factor 
