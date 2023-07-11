@@ -75,23 +75,36 @@ class Hydrogen(Atom):
     
     """
 
-    _ZNUM = 1
-
+    def __init__(self, name='hydrogen', levels=np.arange(1,11)):
+        """ 
+        Parameters
+        ----------
+        name : str
+            name of atom
+        levels : NDarray of integers
+            Levels at which to calculate energy and degeneracy, 
+            default 1 to 10.
+        
+        """
+        self.name = name
+        self.levels = levels
+        self.gdegen = self.gdegen_at_level(levels)
+        self.energy = self.energy_at_level(levels)
 
     def energy_at_level(self, levels):
         """ Calculate the energy at each level of a hydrogen atom.
 
         Parameters
         ----------
-        level : arraylike
-            Energy level, n
+        levels : arraylike
+            Energy level(s), n
 
         Returns
         -------
         energy : arraylike
             Energy of each energy level, in cgs units (ergs)
 
-        TODO: Use more precise version of this eq. using Z and rydberg const
+        TODO: Use more precise/generic version of this eq. using Z and rydberg const
         E = -13.6 eV / n^2
         """
         energy = -13.6*EVOLT/levels**2
@@ -103,7 +116,7 @@ class Hydrogen(Atom):
         Parameters
         ----------
         level : arraylike
-            Energy level, n
+            Energy level(s), n
 
         Returns
         -------
@@ -113,6 +126,5 @@ class Hydrogen(Atom):
         g = 2 n^2
         """
         gdegen = 2*levels**2
-        self.gdegen=gdegen
         return gdegen
 

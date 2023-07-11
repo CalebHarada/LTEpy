@@ -43,20 +43,21 @@ class Boltzmann_Factor(_LTE):
         """
         self.temp = temp
         self.atom = atom
+        self.bfact = None
 
 
     def boltzmann_factor(self):
         """ Calculate probability ratio of probabilities p_i/p_j between energy levels i and j.
      
 
-        p_i/p_j = exp[(E_j - E_i)/kT]
+        factor = exp[ - E_i)/kT]
         """
         if self.bfact is None:
             atom = self.atom
             bfact = np.zeros_like(atom.levels)
             for ii, lev in enumerate(atom.levels):
                 energy = atom.energy[ii]
-                bfact[ii] = np.exp(-energy/KBOLTZ/self.temp)
+                bfact[ii] = (np.exp(-np.float64(energy)/KBOLTZ/self.temp))
         self.bfact = bfact
 
         return self.bfact
