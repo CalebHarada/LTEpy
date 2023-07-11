@@ -24,12 +24,13 @@ class Maxwell_Boltzmann(_LTE):
     
     """
 
-class Boltzmann_Gibbs(_LTE): 
-    """ Class for calculating Boltzmann Distribution (aka Gibbs Distribution, if mu is included) 
+class Boltzmann_Factor(_LTE): 
+    """ Class for calculating Boltzmann Factor 
     between two energy levels of a given atom.
     
+    TODO: Add subclass, Gibbs factor, that also allows for a mu term.
     """ 
-    def __init__(self, temp, atom, levii, levjj):
+    def __init__(self, temp, atom): # , levjj):
         """ Initialize
 
         Parameters
@@ -37,30 +38,12 @@ class Boltzmann_Gibbs(_LTE):
         temp : scalar
             Temperature in K
         atom : equations.Atom Object
-            Atom
-        levii : integer
-            First energy level, i. Must be included in atom.levels
-        levjj : integer
-            Second energy level, j. Must be included in atom.levels
-
+            Atom, contains levels, energy levels, and degeneracies.
 
         """
         self.temp = temp
         self.atom = atom
-        self.levii = levii
-        self.levjj = levjj
 
-        # ---- Parameters from atom
-        ii = list(atom.levels).index(levii)
-        jj = list(atom.levels).index(levjj)
-        self.ii = ii
-        self.jj = jj
-
-        self.gii = atom.gdegen[ii]
-        self.gjj = atom.gdegen[jj]
-
-        self.Eii = atom.energy[ii]
-        self.Ejj = atom.energy[jj]
 
         # These values are calculated as needed by the class when the corresponding methods are called
         # self._pipj = None          #: Probability ratio of ith to jth energy levels
