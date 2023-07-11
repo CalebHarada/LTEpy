@@ -1,0 +1,111 @@
+import numpy as np
+
+from LTEpy.constants import EVOLT, KBOLTZ
+
+
+class Atom():
+    """ Class for storing energy levels and degeneracies for any atom.
+    
+    """
+
+    def __init__(self, name, gdegen, energy, levels=None):
+        """ 
+        Parameters
+        ----------
+        name : str
+            name of atom
+        degen : dict
+            degeneracies
+        elevels : dict
+            energy levels
+        
+        """
+        self.name = name
+        self.gdegen = gdegen
+        self.energy = energy
+
+        if levels is None:
+            levels = np.arange(1,len(gdegen))
+
+        self.levels = levels
+    
+    def boltzmann_factor(self, levii, temp):
+        """ Calculate the Boltzmann factor for a given energy level.
+        gi
+        Parameters
+        ----------
+        levii : int
+            Energy level, ii. Must be included in levels
+        temp : arraylike
+
+
+        Returns
+        -------
+        boltzfact : scalar
+            Boltzmann factor, proportional to the probability of being in state ii
+
+        """
+        ii = list(self.levels).index(levii)
+        Eii = self.energy[ii]
+
+        boltzfact = np.exp(-Eii/KBOLTZ/temp)
+        return boltzfact
+    
+    def partition_function(self, temp):
+        """ Calculate the partition function, the sum of all the Boltzmann factors,
+        using all levels belonging to the atom.
+        
+        
+        """
+        sum = 0
+        for lev in self.levels:
+            sum += self.boltzmann_factor(lev, temp)
+        return sum
+
+
+class Hydrogen(Atom):
+    """ Class for a hydrogen atom, including hydrogen-specific energy level functions.
+    
+    """
+
+    _ZNUM = 1
+
+
+    def energy_at_level(self, levels):
+        """ Calculate the energy at each level of a hydrogen atom.
+
+        Parameters
+        ----------
+        level : arraylike
+            Energy level, n
+
+        Returns
+        -------
+        energy : arraylike
+            Energy of each energy level, in cgs units (ergs)
+
+        TODO: Use more precise version of this eq. using Z and rydberg const
+        E = -13.6 eV / n^2
+        """
+        energy = -13.6*EVOLT/levels**2
+        return energy
+    
+    def gdegen_at_level(self, levels):
+        """ Calculate the degeneracy at each level of a hydrogen atom.
+
+        Parameters
+        ----------
+        level : arraylike
+            Energy level, n
+
+        Returns
+        -------
+        gdegen : arraylike
+            Degeneracy of each energy level
+        
+        g = 2 n^2
+        """
+        gdegen = 2*levels**2
+        self.gdegen=gdegen
+        return gdegen
+
