@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from LTEpy.constants import *
-from LTEpy.constants import KBOLTZ, EV
+from LTEpy.constants import KBOLTZ, EVOLT
 
 
 
