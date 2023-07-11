@@ -1,5 +1,6 @@
 import abc
 import numpy as np
+import matplotlib.pyplot as plt
 
 from LTEpy.constants import KBOLTZ
 
@@ -59,26 +60,21 @@ class Boltzmann_Factor(_LTE):
             bfact = np.zeros_like(atom.levels)
             for ii, lev in enumerate(atom.levels):
                 energy = atom.energy[ii]
-                bfact[ii] = (np.exp(-np.float64(energy)/KBOLTZ/self.temp))
+                bfact[ii] = np.float64(np.exp(-(energy)/KBOLTZ/self.temp))
         self.bfact = bfact
 
         return self.bfact
+    
+    def plot_bfact(self, levmin=None, levmax=None):
+        xx = self.atom.levels
+        yy = self.bfact
 
-
-    # def ninj(self):
-    #     """ Calculate the ratio of number densities n_i/n_j between energy levels i and j
-    #     from the probability ratio and degeneracies.
-        
-        
-    #     n_i/n_j = (g_1/g_2) * exp[(E_j - E_i)/kT] = (g_1/g_2) * (p_i/p_j)
-    #     """
-
-    #     atom = self.atom
-    #     gigj = self.gii / self.gjj
-    #     pipj = self._pipj()
-    #     self.ninj = gigj * pipj
-
-    #     return self.ninj
+        fig, ax = plt.subplots()
+        ax.plot(xx, yy)
+        ax.set_xlabel('Energy Level, $n$')
+        ax.set_ylabel('Boltzmann Factor, $\exp(-E_n/kT)$')
+        ax.set_xscale('log')
+        ax.set_yscale('log')
 
 
 
