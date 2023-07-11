@@ -149,7 +149,7 @@ mathtext.cal : cursive
 mathtext.rm  : serif
 mathtext.tt  : monospace
 mathtext.it  : serif:italic
-mathtext.bf  : serif:bold
+mathtext.bf  : serif:normal
 mathtext.sf  : sans\-serif
 mathtext.fontset : cm # Should be 'cm' (Computer Modern), 'stix',
                       # 'stixsans' or 'custom'
@@ -176,10 +176,10 @@ axes.grid.axis      : both
 axes.titlesize      : large   # fontsize of the axes title
 axes.titley         : 1.0     # at the top, no autopositioning.
 axes.titlepad       : 5.0     # pad between axes and title in points
-axes.titleweight    : bold  # font weight for axes title
+axes.titleweight    : normal  # font weight for axes title
 axes.labelsize      : large  # fontsize of the x any y labels
 axes.labelpad       : 5.0     # space between label and axis
-axes.labelweight    : bold  # weight of the x and y labels
+axes.labelweight    : normal  # weight of the x and y labels
 axes.labelcolor     : k
 axes.axisbelow      : False   # whether axis gridlines and ticks are below
                               # the axes elements (lines, text, etc)
@@ -301,7 +301,7 @@ legend.edgecolor     : inherit   # legend edge color (when 'inherit' uses axes.e
 ### FIGURE
 # See http://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure
 figure.titlesize : medium     # size of the figure title
-figure.titleweight : bold   # weight of the figure title
+figure.titleweight : normal   # weight of the figure title
 figure.figsize   : 8, 6   # figure size in inches
 figure.dpi       : 100     # figure dots per inch
 figure.facecolor : 1.0     # figure facecolor

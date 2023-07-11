@@ -230,7 +230,7 @@ class Boltzmann_Factor(_LTE):
         fig, ax = plot.figax(xscale='linear')
         hh, = ax.plot(xx, yy, label=label)
         ax.set_xlabel(plot.LABEL_LEVEL)
-        ax.set_ylabel(plot.LABEL_BFACT_EXP)
+        ax.set_ylabel(plot.LABEL_BFACT)
 
         return fig, hh
 
