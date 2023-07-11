@@ -193,30 +193,29 @@ class Boltzmann_Factor(_LTE):
         """
         self.temp = temp
         self.atom = atom
-        self.bfact = None
+        self._bfact = None
 
-
-    def boltzmann_factor(self):
+    @property
+    def bfact(self):
         """ Calculate probability ratio of probabilities p_i/p_j between energy levels i and j.
      
 
-        factor = exp[ - E_i)/kT]
+        factor = exp[(-E_i)/kT]
 
-        BUG: This only works for very large temperatures because the bfact is too large otherwise.
         """
-        if self.bfact is None:
+        if self._bfact is None:
             atom = self.atom
             bfact = np.zeros_like(atom.levels, dtype=float)
             for ii, lev in enumerate(atom.levels):
-                energy = atom.energy[ii]
-                bfact[ii] = np.float64(np.exp(-(energy)/KBOLTZ/self.temp))
-        self.bfact = bfact
+                eng = atom.energy[ii]
+                bfact[ii] = np.float64(np.exp(-(eng)/KBOLTZ/self.temp))
+            self._bfact = bfact
+        return self._bfact
 
-        return self.bfact
-    
+
     def draw_bfact(self, ax, levmin=None, levmax=None, color=None):
         if levmin is not None:
-            xmin = list(self.atom.levels).index[levmin]
+            iimin = list(self.atom.levels).index[levmin]
         else:
             iimin = 0
         if levmax is not None:
