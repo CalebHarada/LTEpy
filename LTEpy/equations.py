@@ -25,8 +25,8 @@ class Maxwell_Boltzmann(_LTE):
     """
 
 class Boltzmann_Gibbs(_LTE): 
-    """ Class for calculating Boltzmann Distribution (aka Gibbs Distribution) between 
-    two energy levels of a given atom.
+    """ Class for calculating Boltzmann Distribution (aka Gibbs Distribution, if mu is included) 
+    between two energy levels of a given atom.
     
     """ 
     def __init__(self, temp, atom, levii, levjj):
