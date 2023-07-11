@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-from LTEpy.constants import *
+from constants import *
 
 
 class _LTE(abc.ABC):
