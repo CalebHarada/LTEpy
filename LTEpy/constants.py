@@ -24,6 +24,7 @@ NWTG = ap.constants.G.cgs.value             #: Newton's Gravitational Constant [
 SPLC = ap.constants.c.cgs.value             #: Speed of light [cm/s]
 MELC = ap.constants.m_e.cgs.value           #: Electron Mass [g]
 MPRT = ap.constants.m_p.cgs.value           #: Proton Mass [g]
+AMU = ap.constants.u.cgs.value              #: Atomic Mass Unit [g]
 QELC = ap.constants.e.gauss.value           #: Fundamental unit of charge (electron charge) [fr]
 KBOLTZ = ap.constants.k_B.cgs.value         #: Boltzmann constant [erg/K]
 HPLANCK = ap.constants.h.cgs.value          #: Planck constant [erg/s]
