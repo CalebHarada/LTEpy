@@ -214,7 +214,7 @@ class Boltzmann_Factor(_LTE):
 
         return self.bfact
     
-    def plot_bfact(self, levmin=None, levmax=None):
+    def draw_bfact(self, ax, levmin=None, levmax=None, color=None):
         if levmin is not None:
             xmin = list(self.atom.levels).index[levmin]
         else:
@@ -227,8 +227,16 @@ class Boltzmann_Factor(_LTE):
         yy = self.bfact[iimin:iimax]
         label = '$T$=%.2eK' % self.temp
 
+        hh, = ax.plot(xx, yy, '-o', label=label, color=color)
+        ax.set_xlabel(plot.LABEL_LEVEL)
+        ax.set_ylabel(plot.LABEL_BFACT)
+
+        return hh,
+
+    def plot_bfact(self, levmin=None, levmax=None,):
+
         fig, ax = plot.figax(xscale='linear')
-        hh, = ax.plot(xx, yy, label=label)
+        hh, = self.draw_bfact(ax, levmin, levmax)
         ax.set_xlabel(plot.LABEL_LEVEL)
         ax.set_ylabel(plot.LABEL_BFACT)
 
