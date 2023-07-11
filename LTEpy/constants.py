@@ -40,3 +40,4 @@ AU = ap.constants.au.cgs.value                                     #: Astronomic
 YR = ap.units.year.to(ap.units.s)                                  #: year [s]
 EVOLT = ap.units.eV.to(ap.units.erg)                               #: Electronvolt in ergs
 JY = ap.units.jansky.to(ap.units.g/ap.units.s**2)                  #: Jansky [erg/s/cm^2/Hz]
+
