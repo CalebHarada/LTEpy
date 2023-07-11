@@ -17,18 +17,35 @@ class _LTE(abc.ABC):
 
 
 class Planck(_LTE):
-    """ 
-    
+    """ Class for calculating the Planck Function (either in wavelength or frequency) given an LTE object
+
     """
 
     def __init__(self, temp):
+        """ Initialize
+
+        Parameters
+        ----------
+        temp : scalar
+            Temperature in K
+
+        """
+
         super().__init__(temp)
 
         self.temp = temp
 
     def compute_B_nu(self, nu):
-        """
+        """ Calculate the specific intensity B_nu (in cgs units) for a given frequency
+
+        Parameters
+        ----------
+        nu : scalar
+            frequency in Hz
+
         
+        B_nu = (2*h * nu^3 / c^2) * 1/(exp[h*nu / k*T] - 1)
+            
         """
 
         spec_intensity_nu = (2 * HPLANCK * nu**3 / SPLC**2) / (np.exp(HPLANCK * nu / (KBOLTZ * self.temp)) - 1)
@@ -36,8 +53,16 @@ class Planck(_LTE):
         return spec_intensity_nu
     
     def compute_B_lambda(self, wl):
-        """
+        """ Calculate the specific intensity B_lambda (in cgs units) for a given wavelength
+
+        Parameters
+        ----------
+        wl : scalar
+            wavelength in cm
+
         
+        B_lambda = (2*h * c^2 / lambda^5) * 1/(exp[h*c / lambda*k*T] - 1)
+            
         """
 
         spec_intensity_lamb = (2 * HPLANCK * SPLC**2 / wl**5) / (np.exp(HPLANCK * SPLC / (wl * KBOLTZ * self.temp)) - 1)
@@ -46,7 +71,18 @@ class Planck(_LTE):
     
 
     def plot_B_nu(self, nu_1, nu_2, N_nu=500, lw=1, **kwargs):
-        """
+        """ Plot specific intensity B_nu between two frequencies
+        
+        Parameters
+        ----------
+        nu_1 : scalar
+            first frequency in Hz
+        nu_2 : scalar
+            second frequency in Hz
+        N_nu : scalar
+            number of frequency points to plot
+        lw : scalar
+            line width for plotting
         
         """
 
@@ -59,7 +95,18 @@ class Planck(_LTE):
 
 
     def plot_B_lambda(self, wl_1, wl_2, N_wl=500, lw=1, **kwargs):
-        """
+        """ Plot specific intensity B_lambda between two wavelengths
+        
+        Parameters
+        ----------
+        wl_1 : scalar
+            first wavelength in cm
+        wl_2 : scalar
+            second wavelength in cm
+        N_wl : scalar
+            number of wavelength points to plot
+        lw : scalar
+            line width for plotting
         
         """
 
