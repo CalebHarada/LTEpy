@@ -68,13 +68,16 @@ class Boltzmann_Factor(_LTE):
     def plot_bfact(self, levmin=None, levmax=None):
         xx = self.atom.levels
         yy = self.bfact
+        label = '$T$=%.2eK' % self.temp
 
         fig, ax = plt.subplots()
-        ax.plot(xx, yy)
+        hh, = ax.plot(xx, yy, label=label)
         ax.set_xlabel('Energy Level, $n$')
         ax.set_ylabel('Boltzmann Factor, $\exp(-E_n/kT)$')
         # ax.set_xscale('log')
         ax.set_yscale('log')
+
+        return fig, hh
 
 
 
