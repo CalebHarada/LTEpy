@@ -32,13 +32,13 @@ class Atom():
     
     def boltzmann_factor(self, levii, temp):
         """ Calculate the Boltzmann factor for a given energy level.
-        
+        gi
         Parameters
         ----------
         levii : int
             Energy level, ii. Must be included in levels
         temp : arraylike
-            
+
 
         Returns
         -------
@@ -50,6 +50,13 @@ class Atom():
         Eii = self.energy[ii]
 
         boltzfact = np.exp(-Eii/KBOLTZ/temp)
+        return boltzfact
+    
+    def partition_function(self, temp):
+        sum = 0
+        for lev in self.levels:
+            sum += self.boltzmann_factor(lev, temp)
+        return sum
 
 
 class Hydrogen(Atom):
