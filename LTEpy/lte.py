@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 from LTEpy.constants import *
 from LTEpy.constants import KBOLTZ, EVOLT
-
+import LTEpy.plot as plot
 
 
 class _LTE(abc.ABC):
@@ -170,16 +170,22 @@ class Boltzmann_Factor(_LTE):
         return self.bfact
     
     def plot_bfact(self, levmin=None, levmax=None):
-        xx = self.atom.levels
-        yy = self.bfact
+        if levmin is not None:
+            xmin = list(self.atom.levels).index[levmin]
+        else:
+            iimin = 0
+        if levmax is not None:
+            iimax = list(self.atom.levels).index[levmax]
+        else:
+            iimax = -1
+        xx = self.atom.levels[iimin:iimax]
+        yy = self.bfact[iimin:iimax]
         label = '$T$=%.2eK' % self.temp
 
-        fig, ax = plt.subplots()
+        fig, ax = plot.figax(xscale='linear')
         hh, = ax.plot(xx, yy, label=label)
-        ax.set_xlabel('Energy Level, $n$')
-        ax.set_ylabel('Boltzmann Factor, $\exp(-E_n/kT)$')
-        # ax.set_xscale('log')
-        ax.set_yscale('log')
+        ax.set_xlabel(plot.LABEL_LEVEL)
+        ax.set_ylabel(plot.LABEL_BFACT_EXP)
 
         return fig, hh
 
