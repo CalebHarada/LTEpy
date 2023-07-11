@@ -51,6 +51,8 @@ class Boltzmann_Factor(_LTE):
      
 
         factor = exp[ - E_i)/kT]
+
+        BUG: This only works for very large temperatures because the bfact is too large otherwise.
         """
         if self.bfact is None:
             atom = self.atom
