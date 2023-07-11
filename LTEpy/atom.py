@@ -1,4 +1,3 @@
-
 import numpy as np
 
 from LTEpy.constants import EVOLT, KBOLTZ
@@ -53,6 +52,11 @@ class Atom():
         return boltzfact
     
     def partition_function(self, temp):
+        """ Calculate the partition function, the sum of all the Boltzmann factors,
+        using all levels belonging to the atom.
+        
+        
+        """
         sum = 0
         for lev in self.levels:
             sum += self.boltzmann_factor(lev, temp)

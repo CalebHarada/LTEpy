@@ -1,7 +1,7 @@
 import abc
 import numpy as np
 
-from constants import KBOLTZ
+from LTEpy.constants import KBOLTZ
 
 class _LTE(abc.ABC):
     """
@@ -51,34 +51,32 @@ class Boltzmann_Gibbs(_LTE):
         self.levjj = levjj
 
         # ---- Parameters from atom
-        ii = atom.levels.index(levii)
-        jj = atom.levels.index(levjj)
+        ii = list(atom.levels).index(levii)
+        jj = list(atom.levels).index(levjj)
         self.ii = ii
         self.jj = jj
 
-        self.gii = atom.degen(ii)
-        self.gjj = atom.degen(jj)
+        self.gii = atom.gdegen[ii]
+        self.gjj = atom.gdegen[jj]
 
-        self.Eii = atom.energy(ii)
-        self.Ejj = atom.energy(jj)
+        self.Eii = atom.energy[ii]
+        self.Ejj = atom.energy[jj]
 
         # These values are calculated as needed by the class when the corresponding methods are called
         self._pipj = None          #: Probability ratio of ith to jth energy levels
-        self._deltaE = None        #: Difference between ith and jth energy levels)
+        # self._deltaE = None        #: Difference between ith and jth energy levels)
         
 
-    @property
-    def _deltaE(self):
-        """ Calculate the difference between energy levels.
+    # @property
+    # def _deltaE(self):
+    #     """ Calculate the difference between energy levels.
         
-        """
-        if self._deltaE is None:
-            deltaE = self.Ejj - self.Eii
-            self._deltaE = deltaE
+    #     """
+    #     if self._deltaE is None:
+    #         deltaE = self.Ejj - self.Eii
+    #         self._deltaE = deltaE
 
-        return deltaE
-
-
+    #     return self._deltaE
 
     @property
     def _pipj(self):
@@ -88,7 +86,6 @@ class Boltzmann_Gibbs(_LTE):
         p_i/p_j = exp[(E_j - E_i)/kT]
         """
         if self._pipj is None:
-            deltaE = self._deltaE
             pipj = np.exp(-(self.Eii - self.Ejj)
                           /KBOLTZ/self.temp)
             self._pipj = pipj
@@ -100,16 +97,19 @@ class Boltzmann_Gibbs(_LTE):
         """ Calculate the ratio of number densities n_i/n_j between energy levels i and j
         from the probability ratio and degeneracies.
         
+        
         n_i/n_j = (g_1/g_2) * exp[(E_j - E_i)/kT] = (g_1/g_2) * (p_i/p_j)
         """
 
         atom = self.atom
         gigj = self.gii / self.gjj
         pipj = self._pipj
+        print(f"{type(gigj)=}, {type(pipj)=}")
         self.ninj = gigj * pipj
 
         return self.ninj
-        
+
+
 
         
 
