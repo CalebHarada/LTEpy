@@ -5,3 +5,5 @@ LTEpy/.DS_Store
 
 __pycache__
 LTEpy/__pycache__
+
+.vscode
