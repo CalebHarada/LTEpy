@@ -6,6 +6,13 @@ from LTEpy.constants import EVOLT, KBOLTZ
 class Atom():
     """ Class for storing energy levels and degeneracies for any atom.
     
+    Attributes : 
+    levels : NDarray of ints
+        Energy levels
+    energy : NDarray of floats
+        Energy of each energy level, in ergs
+    gdegen : NDarray of ints
+        Degeneracy of each energy level
     """
 
     def __init__(self, name, gdegen, energy, levels=None):
