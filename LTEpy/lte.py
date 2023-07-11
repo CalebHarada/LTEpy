@@ -3,8 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from LTEpy.constants import *
-from LTEpy.constants import KBOLTZ, EVOLT
-
 
 
 class _LTE(abc.ABC):
@@ -35,6 +33,20 @@ class Planck(_LTE):
         super().__init__(temp)
 
         self.temp = temp
+        
+
+    def set_temp(self, temp):
+        """Set the temperature of this Planck object
+
+        Parameters
+        ----------
+        temp : scalar
+            temperature in Kelvin
+        
+        """
+
+        self.temp = temp
+
 
     def compute_B_nu(self, nu):
         """ Calculate the specific intensity B_nu (in cgs units) for a given frequency
@@ -52,6 +64,7 @@ class Planck(_LTE):
         spec_intensity_nu = (2 * HPLANCK * nu**3 / SPLC**2) / (np.exp(HPLANCK * nu / (KBOLTZ * self.temp)) - 1)
 
         return spec_intensity_nu
+    
     
     def compute_B_lambda(self, wl):
         """ Calculate the specific intensity B_lambda (in cgs units) for a given wavelength
@@ -71,7 +84,7 @@ class Planck(_LTE):
         return spec_intensity_lamb
     
 
-    def plot_B_nu(self, nu_1, nu_2, N_nu=500, lw=1, **kwargs):
+    def plot_B_nu(self, nu_1, nu_2, N_nu=500, lw=1, log_scale=True, ax=None, **kwargs):
         """ Plot specific intensity B_nu between two frequencies
         
         Parameters
@@ -84,39 +97,70 @@ class Planck(_LTE):
             number of frequency points to plot
         lw : scalar
             line width for plotting
+        log_scale : bool
+            select option to turn off log scale
+        ax : matplotlib axis object
+            option to choose which axis to plot on
         
         """
 
-        nus = np.linspace(nu_1, nu_2, N_nu)
+        nus = np.linspace(nu_1, nu_2, N_nu)  # define frequency array
 
-        fig, ax = plt.subplots()
-        ax.plot(nus, self.compute_B_nu(nus), lw=lw, **kwargs)
+        if not ax:
+            fig, ax = plt.subplots()
+
+        ax.plot(nus, self.compute_B_nu(nus), lw=lw, label="{:} K".format(self.temp), **kwargs)
+        ax.set_xlabel("Frequency (Hz)")
+        ax.set_ylabel("$B_\\nu$ (cgs)")
+        ax.legend(loc=1)
         
-        plt.show()
+        if log_scale:
+            ax.set_xscale("log")
+            ax.set_yscale("log")
+        
+        if not ax:
+            return fig, ax
 
 
-    def plot_B_lambda(self, wl_1, wl_2, N_wl=500, lw=1, **kwargs):
+    def plot_B_lambda(self, wl_1, wl_2, N_wl=500, lw=1, log_scale=True, ax=None, **kwargs):
         """ Plot specific intensity B_lambda between two wavelengths
         
         Parameters
         ----------
         wl_1 : scalar
-            first wavelength in cm
+            first wavelength in Angstroms
         wl_2 : scalar
-            second wavelength in cm
+            second wavelength in Angstroms
         N_wl : scalar
             number of wavelength points to plot
         lw : scalar
             line width for plotting
+        log_scale : bool
+            select option to turn off log scale
+        ax : matplotlib axis object
+            option to choose which axis to plot on
         
         """
 
-        wls = np.linspace(wl_1, wl_2, N_wl)
+        wls = np.linspace(wl_1, wl_2, N_wl)  # define wavelength array
 
-        fig, ax = plt.subplots()
-        ax.plot(wls, self.compute_B_lambda(wls), lw=lw, **kwargs)
+        if log_scale:
+            wls = np.geomspace(wl_1, wl_2, N_wl)
+
+        if not ax:
+            fig, ax = plt.subplots()
+
+        ax.plot(wls, self.compute_B_lambda(wls * 1e-8), lw=lw, label="{:} K".format(self.temp), **kwargs)
+        ax.set_xlabel("Wavelength ($\AA$)")
+        ax.set_ylabel("$B_\lambda$ (cgs)")
+        ax.legend(loc=1)
+
+        if log_scale:
+            ax.set_xscale("log")
+            ax.set_yscale("log")
         
-        plt.show()
+        if not ax:
+            return fig, ax
 
 
 
