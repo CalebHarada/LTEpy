@@ -3,13 +3,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-mpl.style.use('default')   # avoid dark backgrounds from dark theme vscode
-plt.rcParams['axes.grid'] = True
-plt.rcParams['grid.alpha'] = 0.15
-plt.rcParams["mathtext.fontset"] = "cm"
-plt.rcParams["font.family"] = "serif"
-plt.rcParams["legend.handlelength"] = 1.5
-plt.rcParams["lines.solid_capstyle"] = 'round'
+mpl.style.use('custom.mplsytle')   # avoid dark backgrounds from dark theme vscode
+# plt.rcParams['axes.grid'] = True
+# plt.rcParams['grid.alpha'] = 0.15
+# plt.rcParams["mathtext.fontset"] = "cm"
+# plt.rcParams["font.family"] = "serif"
+# plt.rcParams["legend.handlelength"] = 1.5
+# plt.rcParams["lines.solid_capstyle"] = 'round'
 
 LABEL_TEMP = r"Temperature $[\mathrm{K}]$"
 LABEL_LEVEL = r"Energy Level"
