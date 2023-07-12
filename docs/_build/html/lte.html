@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LTE Functions &mdash; LTEpy 0.1.1 documentation</title>
+  <title>Local Thermodynamic Equilibrium Functions &mdash; LTEpy 0.1.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -42,7 +42,30 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">LTE Functions</a></li>
+<li><a class="reference internal" href="#">Local Thermodynamic Equilibrium Functions</a><ul>
+<li><a class="reference internal" href="#lte.Boltzmann_Factor"><code class="docutils literal notranslate"><span class="pre">Boltzmann_Factor</span></code></a><ul>
+<li><a class="reference internal" href="#lte.Boltzmann_Factor.bfact"><code class="docutils literal notranslate"><span class="pre">Boltzmann_Factor.bfact</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lte.Maxwell_Boltzmann"><code class="docutils literal notranslate"><span class="pre">Maxwell_Boltzmann</span></code></a><ul>
+<li><a class="reference internal" href="#lte.Maxwell_Boltzmann.compute_maxwell_boltzmann"><code class="docutils literal notranslate"><span class="pre">Maxwell_Boltzmann.compute_maxwell_boltzmann()</span></code></a></li>
+<li><a class="reference internal" href="#lte.Maxwell_Boltzmann.plot_fv"><code class="docutils literal notranslate"><span class="pre">Maxwell_Boltzmann.plot_fv()</span></code></a></li>
+<li><a class="reference internal" href="#lte.Maxwell_Boltzmann.set_mass"><code class="docutils literal notranslate"><span class="pre">Maxwell_Boltzmann.set_mass()</span></code></a></li>
+<li><a class="reference internal" href="#lte.Maxwell_Boltzmann.set_temp"><code class="docutils literal notranslate"><span class="pre">Maxwell_Boltzmann.set_temp()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lte.Planck"><code class="docutils literal notranslate"><span class="pre">Planck</span></code></a><ul>
+<li><a class="reference internal" href="#lte.Planck.compute_B_lambda"><code class="docutils literal notranslate"><span class="pre">Planck.compute_B_lambda()</span></code></a></li>
+<li><a class="reference internal" href="#lte.Planck.compute_B_nu"><code class="docutils literal notranslate"><span class="pre">Planck.compute_B_nu()</span></code></a></li>
+<li><a class="reference internal" href="#lte.Planck.compute_lambda_max"><code class="docutils literal notranslate"><span class="pre">Planck.compute_lambda_max()</span></code></a></li>
+<li><a class="reference internal" href="#lte.Planck.plot_B_lambda"><code class="docutils literal notranslate"><span class="pre">Planck.plot_B_lambda()</span></code></a></li>
+<li><a class="reference internal" href="#lte.Planck.plot_B_nu"><code class="docutils literal notranslate"><span class="pre">Planck.plot_B_nu()</span></code></a></li>
+<li><a class="reference internal" href="#lte.Planck.plot_lambda_max"><code class="docutils literal notranslate"><span class="pre">Planck.plot_lambda_max()</span></code></a></li>
+<li><a class="reference internal" href="#lte.Planck.set_temp"><code class="docutils literal notranslate"><span class="pre">Planck.set_temp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
         </div>
@@ -59,7 +82,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">LTE Functions</li>
+      <li class="breadcrumb-item active">Local Thermodynamic Equilibrium Functions</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/lte.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -69,9 +92,171 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="lte-functions">
-<span id="lte"></span><h1>LTE Functions<a class="headerlink" href="#lte-functions" title="Permalink to this heading"></a></h1>
-<p>Functions to do simple LTE calculation.</p>
+  <div class="section" id="local-thermodynamic-equilibrium-functions">
+<span id="lte"></span><h1>Local Thermodynamic Equilibrium Functions<a class="headerlink" href="#local-thermodynamic-equilibrium-functions" title="Permalink to this heading"></a></h1>
+<p>Functions that apply in LTE.</p>
+<span class="target" id="module-lte"></span><dl class="py class">
+<dt class="sig sig-object py" id="lte.Boltzmann_Factor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lte.</span></span><span class="sig-name descname"><span class="pre">Boltzmann_Factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Boltzmann_Factor" title="Permalink to this definition"></a></dt>
+<dd><p>Class for calculating Boltzmann Factor
+between two energy levels of a given atom.</p>
+<p>TODO: Add subclass, Gibbs factor, that also allows for a mu term.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="lte.Boltzmann_Factor.bfact">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bfact</span></span><a class="headerlink" href="#lte.Boltzmann_Factor.bfact" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate probability ratio of probabilities p_i/p_j between energy levels i and j.</p>
+<p>factor = exp[(-E_i)/kT]</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lte.Maxwell_Boltzmann">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lte.</span></span><span class="sig-name descname"><span class="pre">Maxwell_Boltzmann</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Maxwell_Boltzmann" title="Permalink to this definition"></a></dt>
+<dd><p>Class for computing the Maxwell Boltzmann distribution for a given particle and temperature</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lte.Maxwell_Boltzmann.compute_maxwell_boltzmann">
+<span class="sig-name descname"><span class="pre">compute_maxwell_boltzmann</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speed</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Maxwell_Boltzmann.compute_maxwell_boltzmann" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the probability density function of a given speed for a particle of given mass</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>speed</strong> (<em>scalar</em>) – particle speed in cm/s</p>
+</dd>
+</dl>
+<p>f(v) = (m / 2*pi*k*T)^1.5 * 4*pi*v^2 * exp[-m*v^2 / (2*k*T)]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lte.Maxwell_Boltzmann.plot_fv">
+<span class="sig-name descname"><span class="pre">plot_fv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speed_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_speed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Maxwell_Boltzmann.plot_fv" title="Permalink to this definition"></a></dt>
+<dd><p>Plot specific intensity B_nu between two frequencies</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>speed_1</strong> (<em>scalar</em>) – first speed in cm/s</p></li>
+<li><p><strong>speed_2</strong> (<em>scalar</em>) – second speed in cm/s</p></li>
+<li><p><strong>N_speed</strong> (<em>scalar</em>) – number of speed points to plot</p></li>
+<li><p><strong>lw</strong> (<em>scalar</em>) – line width for plotting</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axis object</em>) – option to choose which axis to plot on</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lte.Maxwell_Boltzmann.set_mass">
+<span class="sig-name descname"><span class="pre">set_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Maxwell_Boltzmann.set_mass" title="Permalink to this definition"></a></dt>
+<dd><p>Helper function to set the mass of the particle</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mass</strong> (<em>scalar</em>) – Particle mass in AMU</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lte.Maxwell_Boltzmann.set_temp">
+<span class="sig-name descname"><span class="pre">set_temp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Maxwell_Boltzmann.set_temp" title="Permalink to this definition"></a></dt>
+<dd><p>Set the temperature of this Planck object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>temp</strong> (<em>scalar</em>) – temperature in Kelvin</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lte.Planck">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lte.</span></span><span class="sig-name descname"><span class="pre">Planck</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Planck" title="Permalink to this definition"></a></dt>
+<dd><p>Class for calculating the Planck Function (either in wavelength or frequency) given an LTE object</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lte.Planck.compute_B_lambda">
+<span class="sig-name descname"><span class="pre">compute_B_lambda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wl</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Planck.compute_B_lambda" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the specific intensity B_lambda (in cgs units) for a given wavelength</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>wl</strong> (<em>scalar</em>) – wavelength in cm</p>
+</dd>
+</dl>
+<p>B_lambda = (2*h * c^2 / lambda^5) * 1/(exp[h*c / lambda*k*T] - 1)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lte.Planck.compute_B_nu">
+<span class="sig-name descname"><span class="pre">compute_B_nu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nu</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Planck.compute_B_nu" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the specific intensity B_nu (in cgs units) for a given frequency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nu</strong> (<em>scalar</em>) – frequency in Hz</p>
+</dd>
+</dl>
+<p>B_nu = (2*h * nu^3 / c^2) * 1/(exp[h*nu / k*T] - 1)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lte.Planck.compute_lambda_max">
+<span class="sig-name descname"><span class="pre">compute_lambda_max</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#lte.Planck.compute_lambda_max" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the wavelength of maximum irradiance from Wien’s Law (in cm)</p>
+<p>lambda_max = b / T</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lte.Planck.plot_B_lambda">
+<span class="sig-name descname"><span class="pre">plot_B_lambda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wl_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wl_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_wl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Planck.plot_B_lambda" title="Permalink to this definition"></a></dt>
+<dd><p>Plot specific intensity B_lambda between two wavelengths</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wl_1</strong> (<em>scalar</em>) – first wavelength in Angstroms</p></li>
+<li><p><strong>wl_2</strong> (<em>scalar</em>) – second wavelength in Angstroms</p></li>
+<li><p><strong>N_wl</strong> (<em>scalar</em>) – number of wavelength points to plot</p></li>
+<li><p><strong>lw</strong> (<em>scalar</em>) – line width for plotting</p></li>
+<li><p><strong>log_scale</strong> (<em>bool</em>) – select option to turn off log scale</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axis object</em>) – option to choose which axis to plot on</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lte.Planck.plot_B_nu">
+<span class="sig-name descname"><span class="pre">plot_B_nu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nu_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_nu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Planck.plot_B_nu" title="Permalink to this definition"></a></dt>
+<dd><p>Plot specific intensity B_nu between two frequencies</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nu_1</strong> (<em>scalar</em>) – first frequency in Hz</p></li>
+<li><p><strong>nu_2</strong> (<em>scalar</em>) – second frequency in Hz</p></li>
+<li><p><strong>N_nu</strong> (<em>scalar</em>) – number of frequency points to plot</p></li>
+<li><p><strong>lw</strong> (<em>scalar</em>) – line width for plotting</p></li>
+<li><p><strong>log_scale</strong> (<em>bool</em>) – select option to turn off log scale</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axis object</em>) – option to choose which axis to plot on</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lte.Planck.plot_lambda_max">
+<span class="sig-name descname"><span class="pre">plot_lambda_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Planck.plot_lambda_max" title="Permalink to this definition"></a></dt>
+<dd><p>Plot peak wavelength according to Wien’s Law</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lte.Planck.set_temp">
+<span class="sig-name descname"><span class="pre">set_temp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Planck.set_temp" title="Permalink to this definition"></a></dt>
+<dd><p>Set the temperature of this Planck object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>temp</strong> (<em>scalar</em>) – temperature in Kelvin</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
