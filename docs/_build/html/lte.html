@@ -242,7 +242,7 @@ from Wien’s Law in cm.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="lte.Planck.plot_B_lambda">
-<span class="sig-name descname"><span class="pre">plot_B_lambda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wl_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wl_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_wl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Planck.plot_B_lambda" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">plot_B_lambda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wl_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wl_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_wl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">ax_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Planck.plot_B_lambda" title="Permalink to this definition"></a></dt>
 <dd><p>Plot spectral radiance in wavelength space.</p>
 <p>Plot the spectral radiance <span class="math notranslate nohighlight">\(B_\lambda\)</span> between two wavelengths.</p>
 <dl class="field-list simple">
@@ -254,6 +254,7 @@ from Wien’s Law in cm.</p>
 <li><p><strong>lw</strong> (<em>int</em><em>, </em><em>optional</em>) – Plot line width. Defaults to 1.</p></li>
 <li><p><strong>log_scale</strong> (<em>bool</em><em>, </em><em>optional</em>) – Option to plot with a log scale. Defaults to True.</p></li>
 <li><p><strong>ax</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">matplotlib.pyplot.Axes</span></code>, optional) – Matplotlib axis for plotting. Defaults to None.</p></li>
+<li><p><strong>**ax_kwargs</strong> – Keyword arguments passed to <code class="xref py py-obj docutils literal notranslate"><span class="pre">matplotlib.pyplot.Axes</span></code> object.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -267,7 +268,7 @@ from Wien’s Law in cm.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="lte.Planck.plot_B_nu">
-<span class="sig-name descname"><span class="pre">plot_B_nu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nu_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_nu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Planck.plot_B_nu" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">plot_B_nu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nu_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_nu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">ax_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Planck.plot_B_nu" title="Permalink to this definition"></a></dt>
 <dd><p>Plot spectral radiance in frequency space.</p>
 <p>Plot the spectral radiance <span class="math notranslate nohighlight">\(B_\nu\)</span> between two frequencies.</p>
 <dl class="field-list simple">
@@ -279,6 +280,7 @@ from Wien’s Law in cm.</p>
 <li><p><strong>lw</strong> (<em>int</em><em>, </em><em>optional</em>) – Plot line width. Defaults to 1.</p></li>
 <li><p><strong>log_scale</strong> (<em>bool</em><em>, </em><em>optional</em>) – Option to plot with a log scale. Defaults to True.</p></li>
 <li><p><strong>ax</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">matplotlib.pyplot.Axes</span></code>, optional) – Matplotlib axis for plotting. Defaults to None.</p></li>
+<li><p><strong>**ax_kwargs</strong> – Keyword arguments passed to <code class="xref py py-obj docutils literal notranslate"><span class="pre">matplotlib.pyplot.Axes</span></code> object.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -292,12 +294,15 @@ from Wien’s Law in cm.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="lte.Planck.plot_lambda_max">
-<span class="sig-name descname"><span class="pre">plot_lambda_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Planck.plot_lambda_max" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">plot_lambda_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">vline_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Planck.plot_lambda_max" title="Permalink to this definition"></a></dt>
 <dd><p>Plot peak wavelength.</p>
 <p>Plot a vertical line at the peak wavelength <span class="math notranslate nohighlight">\(\lambda_{max}\)</span> in nm according to Wien’s Law.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>ax</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">matplotlib.pyplot.Axes</span></code>) – Matplotlib axis for plotting.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">matplotlib.pyplot.Axes</span></code>) – Matplotlib axis for plotting.</p></li>
+<li><p><strong>**vline_kwargs</strong> – Keyword arguments passed to <code class="xref py py-obj docutils literal notranslate"><span class="pre">matplotlib.pyplot.axvline</span></code></p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
