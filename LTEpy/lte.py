@@ -17,49 +17,47 @@ class _LTE(abc.ABC):
 
 
 class Planck(_LTE):
-    """ Class for calculating the Planck Function (either in wavelength or frequency) given an LTE object
+    """Planck's Law.
 
+    Class for calculating Planck's Law for a blackbody
+    in LTE (either in wavelength or frequency).
+
+    Args:
+        temp (float): Temperature in K.
     """
 
     def __init__(self, temp):
-        """ Initialize
-
-        Parameters
-        ----------
-        temp : scalar
-            Temperature in K
-
-        """
 
         super().__init__(temp)
-
         self.temp = temp
         
 
     def set_temp(self, temp):
-        """Set the temperature of this Planck object
+        """Set temperature.
 
-        Parameters
-        ----------
-        temp : scalar
-            temperature in Kelvin
-        
+        Changes the temperature of this Planck object.
+
+        Args:
+            temp (float): Temperature in K.
         """
 
         self.temp = temp
 
 
     def compute_B_nu(self, nu):
-        """ Calculate the specific intensity B_nu (in cgs units) for a given frequency
+        """Spectral radiance in frequency space.
 
-        Parameters
-        ----------
-        nu : scalar
-            frequency in Hz
+        Calculate the spectral radiance (or specific intensity) :math:`B_\\nu`
+        for a given frequency in cgs units.
 
-        
-        B_nu = (2*h * nu^3 / c^2) * 1/(exp[h*nu / k*T] - 1)
-            
+        .. math::
+            B_\\nu(T) = \\frac{2 h \\nu^3}{c^2} \\frac{1}{e^{h \\nu / k T} - 1}
+
+        Args:
+            nu (float or :obj:`np.array`): Frequency in Hz.
+
+        Returns:
+            float or :obj:`np.array`: Spectral radiance in erg/s/cm^2/sr/Hz.
         """
 
         spec_intensity_nu = (2 * HPLANCK * nu**3 / SPLC**2) / (np.exp(HPLANCK * nu / (KBOLTZ * self.temp)) - 1)
@@ -68,28 +66,38 @@ class Planck(_LTE):
     
     
     def compute_B_lambda(self, wl):
-        """ Calculate the specific intensity B_lambda (in cgs units) for a given wavelength
+        """Spectral radiance in wavelength space.
 
-        Parameters
-        ----------
-        wl : scalar
-            wavelength in cm
+        Calculate the spectral radiance (or specific intensity) :math:`B_\\lambda`
+        for a given wavelength in cgs units.
 
-        
-        B_lambda = (2*h * c^2 / lambda^5) * 1/(exp[h*c / lambda*k*T] - 1)
-            
+        .. math::
+            B_\\lambda(T) = \\frac{2 h c^2}{\\lambda^5} \\frac{1}{e^{h c / \\lambda k T} - 1}
+
+        Args:
+            wl (float or :obj:`np.array`): Wavelength in cm.
+
+        Returns:
+            float or :obj:`np.array`: Spectral radiance in erg/s/cm^2/sr/nm.
         """
 
         spec_intensity_lamb = (2 * HPLANCK * SPLC**2 / wl**5) / (np.exp(HPLANCK * SPLC / (wl * KBOLTZ * self.temp)) - 1)
+        spec_intensity_lamb *= 1e-7
 
         return spec_intensity_lamb
     
 
     def compute_lambda_max(self):
-        """ Calculate the wavelength of maximum irradiance from Wien's Law (in cm)
+        """Wien's Displacement Law.
 
-        lambda_max = b / T
-        
+        Calculate the wavelength of maximum spectral radiance :math:`\\lambda_{max}`
+        from Wien's Law in cm.
+
+        .. math::
+            \\lambda_{max} = \\frac{b}{T}
+
+        Returns:
+            float: Peak wavelength in cm.
         """
 
         wl_max = B_WIEN / self.temp
@@ -98,71 +106,68 @@ class Planck(_LTE):
 
         
     def plot_B_nu(self, nu_1, nu_2, N_nu=500, lw=1, log_scale=True, ax=None, **kwargs):
-        """ Plot specific intensity B_nu between two frequencies
-        
-        Parameters
-        ----------
-        nu_1 : scalar
-            first frequency in Hz
-        nu_2 : scalar
-            second frequency in Hz
-        N_nu : scalar
-            number of frequency points to plot
-        lw : scalar
-            line width for plotting
-        log_scale : bool
-            select option to turn off log scale
-        ax : matplotlib axis object
-            option to choose which axis to plot on
-        
+        """Plot spectral radiance in frequency space.
+
+        Plot the spectral radiance :math:`B_\\nu` between two frequencies.
+
+        Args:
+            nu_1 (float): First frequency in Hz.
+            nu_2 (float): Second frequency in Hz.
+            N_nu (int, optional): Number of frequency points to plot. Defaults to 500.
+            lw (int, optional): Plot line width. Defaults to 1.
+            log_scale (bool, optional): Option to plot with a log scale. Defaults to True.
+            ax (:obj:`matplotlib.pyplot.Axes`, optional): Matplotlib axis for plotting. Defaults to None.
+
+        Returns:
+            :obj:`matplotlib.pyplot.Axes`: Matplotlib axis
         """
 
         nus = np.linspace(nu_1, nu_2, N_nu)  # define frequency array
 
         if not ax:
-            fig, ax = plt.subplots()
+            _, ax = plt.subplots()
 
         ax.plot(nus, self.compute_B_nu(nus), lw=lw, label="{:} K".format(self.temp), **kwargs)
         ax.set_xlabel("Frequency (Hz)")
-        ax.set_ylabel("$B_\\nu$ (cgs)")
+        ax.set_ylabel("$B_\\nu$ (erg s$^{-1}$ cm$^{-2}$ sr$^{-1}$ Hz$^{-1}$)")
         ax.legend(loc=1)
         
         if log_scale:
             ax.set_xscale("log")
             ax.set_yscale("log")
         
-        if not ax:
-            return fig, ax
+        return ax
 
 
     def plot_lambda_max(self, ax, **kwargs):
-        """ Plot peak wavelength according to Wien's Law
-        
+        """Plot peak wavelength.
+
+        Plot a vertical line at the peak wavelength :math:`\\lambda_{max}` in nm according to Wien's Law.
+
+        Args:
+            ax (:obj:`matplotlib.pyplot.Axes`): Matplotlib axis for plotting.
         """
 
         wl_max = self.compute_lambda_max()
 
-        ax.axvline(wl_max * 1e8, **kwargs)
+        ax.axvline(wl_max * 1e7, **kwargs)
 
 
     def plot_B_lambda(self, wl_1, wl_2, N_wl=500, lw=1, log_scale=True, ax=None, **kwargs):
-        """ Plot specific intensity B_lambda between two wavelengths
-        
-        Parameters
-        ----------
-        wl_1 : scalar
-            first wavelength in Angstroms
-        wl_2 : scalar
-            second wavelength in Angstroms
-        N_wl : scalar
-            number of wavelength points to plot
-        lw : scalar
-            line width for plotting
-        log_scale : bool
-            select option to turn off log scale
-        ax : matplotlib axis object
-            option to choose which axis to plot on
-        
+        """Plot spectral radiance in wavelength space.
+
+        Plot the spectral radiance :math:`B_\\lambda` between two wavelengths.
+
+        Args:
+            wl_1 (float): First wavelength in nm. 
+            wl_2 (float): Second wavelength in nm.
+            N_wl (int, optional): Number of wavelength points to plot. Defaults to 500.
+            lw (int, optional): Plot line width. Defaults to 1.
+            log_scale (bool, optional): Option to plot with a log scale. Defaults to True.
+            ax (:obj:`matplotlib.pyplot.Axes`, optional): Matplotlib axis for plotting. Defaults to None.
+
+        Returns:
+            :obj:`matplotlib.pyplot.Axes`: Matplotlib axis
         """
 
         wls = np.linspace(wl_1, wl_2, N_wl)  # define wavelength array
@@ -171,19 +176,18 @@ class Planck(_LTE):
             wls = np.geomspace(wl_1, wl_2, N_wl)
 
         if not ax:
-            fig, ax = plt.subplots()
+            _, ax = plt.subplots()
 
-        ax.plot(wls, self.compute_B_lambda(wls * 1e-8), lw=lw, label="{:} K".format(self.temp), **kwargs)
-        ax.set_xlabel("Wavelength ($\AA$)")
-        ax.set_ylabel("$B_\lambda$ (cgs)")
+        ax.plot(wls, self.compute_B_lambda(wls * 1e-7), lw=lw, label="{:} K".format(self.temp), **kwargs)
+        ax.set_xlabel("Wavelength (nm)")
+        ax.set_ylabel("$B_\lambda$ (erg s$^{-1}$ cm$^{-2}$ sr$^{-1}$ nm$^{-1}$)")
         ax.legend(loc=1)
 
         if log_scale:
             ax.set_xscale("log")
             ax.set_yscale("log")
         
-        if not ax:
-            return fig, ax
+        return ax
         
         
 
