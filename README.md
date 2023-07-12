@@ -9,6 +9,8 @@ LTEpy is a python package for calculating and visualizing functions in local the
 
 # Documentation
 
+See documentation on [readthedocs](https://ltepy.readthedocs.io/en/latest/).
+
 # Attribution
 
 # Acknowledgements
