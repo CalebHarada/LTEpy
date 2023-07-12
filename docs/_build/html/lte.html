@@ -174,7 +174,7 @@ between two energy levels of a given atom.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lte.</span></span><span class="sig-name descname"><span class="pre">Planck</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Planck" title="Permalink to this definition"></a></dt>
 <dd><p>Planck’s Law.</p>
 <p>Class for calculating Planck’s Law for a blackbody
-in LTE (either in wavelength or frequency).</p>
+in Local Thermodynamic Equilibrium (either in wavelength or frequency).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>temp</strong> (<em>float</em>) – Temperature in K.</p>
@@ -185,7 +185,7 @@ in LTE (either in wavelength or frequency).</p>
 <span class="sig-name descname"><span class="pre">compute_B_lambda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wl</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#lte.Planck.compute_B_lambda" title="Permalink to this definition"></a></dt>
 <dd><p>Spectral radiance in wavelength space.</p>
 <p>Calculate the spectral radiance (or specific intensity) <span class="math notranslate nohighlight">\(B_\lambda\)</span>
-for a given wavelength in cgs units.</p>
+for a given wavelength.</p>
 <div class="math notranslate nohighlight">
 \[B_\lambda(T) = \frac{2 h c^2}{\lambda^5} \frac{1}{e^{h c / \lambda k T} - 1}\]</div>
 <dl class="field-list simple">
