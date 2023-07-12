@@ -9,6 +9,7 @@ def get_property(prop, project):
     )
     return result.group(1)
 
+# stolen from orbitize!
 def get_requires():
     reqs = []
     for line in open("requirements.txt", "r").readlines():
