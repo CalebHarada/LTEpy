@@ -13,3 +13,7 @@ LTEpy is a python package for calculating and visualizing functions in local the
 
 # Acknowledgements
 Code/astro
+
+
+
+[![DOI](https://zenodo.org/badge/664794683.svg)](https://zenodo.org/badge/latestdoi/664794683)
