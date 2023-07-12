@@ -85,6 +85,18 @@ class Planck(_LTE):
         return spec_intensity_lamb
     
 
+    def compute_lambda_max(self):
+        """ Calculate the wavelength of maximum irradiance from Wien's Law (in cm)
+
+        lambda_max = b / T
+        
+        """
+
+        wl_max = B_WIEN / self.temp
+        
+        return wl_max
+
+        
     def plot_B_nu(self, nu_1, nu_2, N_nu=500, lw=1, log_scale=True, ax=None, **kwargs):
         """ Plot specific intensity B_nu between two frequencies
         
@@ -121,6 +133,16 @@ class Planck(_LTE):
         
         if not ax:
             return fig, ax
+
+
+    def plot_lambda_max(self, ax, **kwargs):
+        """ Plot peak wavelength according to Wien's Law
+        
+        """
+
+        wl_max = self.compute_lambda_max()
+
+        ax.axvline(wl_max * 1e8, **kwargs)
 
 
     def plot_B_lambda(self, wl_1, wl_2, N_wl=500, lw=1, log_scale=True, ax=None, **kwargs):
@@ -162,6 +184,8 @@ class Planck(_LTE):
         
         if not ax:
             return fig, ax
+        
+        
 
 
 

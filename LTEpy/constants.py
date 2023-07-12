@@ -30,6 +30,7 @@ KBOLTZ = ap.constants.k_B.cgs.value         #: Boltzmann constant [erg/K]
 HPLANCK = ap.constants.h.cgs.value          #: Planck constant [erg/s]
 SIGMA_SB = ap.constants.sigma_sb.cgs.value  #: Stefan-Boltzmann constant [erg/cm^2/s/K^4]
 SIGMA_T = ap.constants.sigma_T.cgs.value    #: Thomson/Electron -Scattering cross-section [cm^2]
+B_WIEN = ap.constants.b_wien.cgs.value      #: Wien's Displacement Constant [cm K]
 
 
 # ---- Typical astronomy units
