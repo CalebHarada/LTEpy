@@ -20,7 +20,7 @@ class Planck(_LTE):
     """Planck's Law.
 
     Class for calculating Planck's Law for a blackbody
-    in LTE (either in wavelength or frequency).
+    in Local Thermodynamic Equilibrium (either in wavelength or frequency).
 
     Args:
         temp (float): Temperature in K.
@@ -69,7 +69,7 @@ class Planck(_LTE):
         """Spectral radiance in wavelength space.
 
         Calculate the spectral radiance (or specific intensity) :math:`B_\\lambda`
-        for a given wavelength in cgs units.
+        for a given wavelength.
 
         .. math::
             B_\\lambda(T) = \\frac{2 h c^2}{\\lambda^5} \\frac{1}{e^{h c / \\lambda k T} - 1}
