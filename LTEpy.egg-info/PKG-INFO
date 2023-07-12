@@ -1,0 +1,8 @@
+Metadata-Version: 2.1
+Name: LTEpy
+Version: 0.1.0
+Summary: LTEpy is a package for calculating and vizualing properties of a gas in local thermodynamic equilibrium.
+Home-page: https://github.com/CalebHarada/LTEpy
+Author: Gardiner, E. C., Harada, C.
+Author-email: ecg@berkeley.edu, charada@berkeley.edu
+License: MIT
