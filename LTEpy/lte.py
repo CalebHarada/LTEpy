@@ -105,7 +105,7 @@ class Planck(_LTE):
         return wl_max
 
         
-    def plot_B_nu(self, nu_1, nu_2, N_nu=500, lw=1, log_scale=True, ax=None, **kwargs):
+    def plot_B_nu(self, nu_1, nu_2, N_nu=500, lw=1, log_scale=True, ax=None, **ax_kwargs):
         """Plot spectral radiance in frequency space.
 
         Plot the spectral radiance :math:`B_\\nu` between two frequencies.
@@ -117,6 +117,7 @@ class Planck(_LTE):
             lw (int, optional): Plot line width. Defaults to 1.
             log_scale (bool, optional): Option to plot with a log scale. Defaults to True.
             ax (:obj:`matplotlib.pyplot.Axes`, optional): Matplotlib axis for plotting. Defaults to None.
+            **ax_kwargs: Keyword arguments passed to :obj:`matplotlib.pyplot.Axes` object.
 
         Returns:
             :obj:`matplotlib.pyplot.Axes`: Matplotlib axis
@@ -127,7 +128,7 @@ class Planck(_LTE):
         if not ax:
             _, ax = plt.subplots()
 
-        ax.plot(nus, self.compute_B_nu(nus), lw=lw, label="{:} K".format(self.temp), **kwargs)
+        ax.plot(nus, self.compute_B_nu(nus), lw=lw, label="{:} K".format(self.temp), **ax_kwargs)
         ax.set_xlabel("Frequency (Hz)")
         ax.set_ylabel("$B_\\nu$ (erg s$^{-1}$ cm$^{-2}$ sr$^{-1}$ Hz$^{-1}$)")
         ax.legend(loc=1)
@@ -139,21 +140,7 @@ class Planck(_LTE):
         return ax
 
 
-    def plot_lambda_max(self, ax, **kwargs):
-        """Plot peak wavelength.
-
-        Plot a vertical line at the peak wavelength :math:`\\lambda_{max}` in nm according to Wien's Law.
-
-        Args:
-            ax (:obj:`matplotlib.pyplot.Axes`): Matplotlib axis for plotting.
-        """
-
-        wl_max = self.compute_lambda_max()
-
-        ax.axvline(wl_max * 1e7, **kwargs)
-
-
-    def plot_B_lambda(self, wl_1, wl_2, N_wl=500, lw=1, log_scale=True, ax=None, **kwargs):
+    def plot_B_lambda(self, wl_1, wl_2, N_wl=500, lw=1, log_scale=True, ax=None, **ax_kwargs):
         """Plot spectral radiance in wavelength space.
 
         Plot the spectral radiance :math:`B_\\lambda` between two wavelengths.
@@ -165,6 +152,7 @@ class Planck(_LTE):
             lw (int, optional): Plot line width. Defaults to 1.
             log_scale (bool, optional): Option to plot with a log scale. Defaults to True.
             ax (:obj:`matplotlib.pyplot.Axes`, optional): Matplotlib axis for plotting. Defaults to None.
+            **ax_kwargs: Keyword arguments passed to :obj:`matplotlib.pyplot.Axes` object.
 
         Returns:
             :obj:`matplotlib.pyplot.Axes`: Matplotlib axis
@@ -178,7 +166,7 @@ class Planck(_LTE):
         if not ax:
             _, ax = plt.subplots()
 
-        ax.plot(wls, self.compute_B_lambda(wls * 1e-7), lw=lw, label="{:} K".format(self.temp), **kwargs)
+        ax.plot(wls, self.compute_B_lambda(wls * 1e-7), lw=lw, label="{:} K".format(self.temp), **ax_kwargs)
         ax.set_xlabel("Wavelength (nm)")
         ax.set_ylabel("$B_\lambda$ (erg s$^{-1}$ cm$^{-2}$ sr$^{-1}$ nm$^{-1}$)")
         ax.legend(loc=1)
@@ -188,7 +176,21 @@ class Planck(_LTE):
             ax.set_yscale("log")
         
         return ax
+    
         
+    def plot_lambda_max(self, ax, **vline_kwargs):
+        """Plot peak wavelength.
+
+        Plot a vertical line at the peak wavelength :math:`\\lambda_{max}` in nm according to Wien's Law.
+
+        Args:
+            ax (:obj:`matplotlib.pyplot.Axes`): Matplotlib axis for plotting.
+            **vline_kwargs: Keyword arguments passed to :obj:`matplotlib.pyplot.axvline`
+        """
+
+        wl_max = self.compute_lambda_max()
+
+        ax.axvline(wl_max * 1e7, **vline_kwargs)
         
 
 
