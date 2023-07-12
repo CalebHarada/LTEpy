@@ -16,6 +16,6 @@ Code/astro
 
 
 
+[![Code/Astro](https://img.shields.io/badge/Made%20at-Code/Astro-blueviolet.svg)](https://semaphorep.github.io/codeastro/)
 [![DOI](https://zenodo.org/badge/664794683.svg)](https://zenodo.org/badge/latestdoi/664794683)
 
-[![Code/Astro](https://img.shields.io/badge/Made%20at-Code/Astro-blueviolet.svg)](https://semaphorep.github.io/codeastro/)
