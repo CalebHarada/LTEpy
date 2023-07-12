@@ -21,7 +21,7 @@ setup(
     version=get_property("__version__", "LTEpy"),
     description="LTEpy is a package for calculating and vizualing properties of a gas in local thermodynamic equilibrium.",
     packages=find_packages(),
-    author="Gardiner, E., Harada, C.",
+    author="Gardiner, E. C., Harada, C.",
     author_email="ecg@berkeley.edu, charada@berkeley.edu",
     license="MIT",
     url="https://github.com/CalebHarada/LTEpy"
