@@ -12,8 +12,7 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('..'))
-sys.path.insert(0, os.path.abspath('../LTEpy'))
+sys.path.insert(0, os.path.abspath('./../LTEpy'))
 
 
 # -- Project information -----------------------------------------------------
@@ -24,7 +23,7 @@ author = 'Gardiner, Emiko C., Harada, Caleb K.'
 root_doc = 'index'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.2'
+# release = '0.1.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -39,6 +38,10 @@ extensions = [
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
+
+# The suffix(es) of source filenames.
+# You can specify multiple suffix as a list of string:
+source_suffix = ".rst"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.

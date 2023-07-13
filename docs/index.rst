@@ -10,7 +10,7 @@ Welcome to LTEpy's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   lte.rst
+   lte
 
 
 Indices and tables

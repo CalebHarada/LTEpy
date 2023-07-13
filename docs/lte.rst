@@ -1,9 +1,7 @@
 .. _lte:
 
-Local Thermodynamic Equilibrium Functions
+Local Thermodynamic Equilibrium
 =========================================
-
-Functions that apply in LTE.
 
 .. automodule:: lte
    :members:
