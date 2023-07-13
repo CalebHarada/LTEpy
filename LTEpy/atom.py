@@ -29,11 +29,12 @@ class Atom():
         """
         self.name = name
 
-
+        if np.any(gdegen<=0):
+            raise ValueError(f"All {gdegen=} must be positive.")
         self.gdegen = gdegen
 
         if np.any(energy>=0):
-            
+            raise ValueError(f"All {energy=} must be negative for bound states.")
         self.energy = energy
 
         if levels is None:
