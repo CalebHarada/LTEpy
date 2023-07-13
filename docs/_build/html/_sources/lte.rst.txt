@@ -1,9 +1,8 @@
-.. module:: LTEpy
+.. _lte:
 
-Local Thermodynamic Equilibrium Functions
+Local Thermodynamic Equilibrium
 =========================================
-
-Functions that apply in LTE.
+.. module:: LTEpy
 
 .. automodule:: LTEpy.lte
    :members:
