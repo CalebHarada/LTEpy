@@ -29,7 +29,13 @@ class Planck(_LTE):
     def __init__(self, temp):
 
         super().__init__(temp)
-        self.temp = temp
+
+        if temp > 0:
+            self.temp = temp
+        elif temp == 0:
+            raise ValueError('Temperature must be greater than 0.')
+        else:
+            raise ValueError('Temperature cannot be negative.')
         
 
     def set_temp(self, temp):
@@ -41,7 +47,12 @@ class Planck(_LTE):
             temp (float): Temperature in K.
         """
 
-        self.temp = temp
+        if temp > 0:
+            self.temp = temp
+        elif temp == 0:
+            raise ValueError('Temperature must be greater than 0.')
+        else:
+            raise ValueError('Temperature cannot be negative.')
 
 
     def compute_B_nu(self, nu):
