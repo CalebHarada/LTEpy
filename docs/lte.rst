@@ -1,7 +1,7 @@
 .. _lte:
 
 Local Thermodynamic Equilibrium
-=========================================
+===============================
 
 .. module:: LTEpy
 

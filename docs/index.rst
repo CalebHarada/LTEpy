@@ -6,10 +6,13 @@
 Welcome to LTEpy's documentation!
 =================================
 
+User Guide:
++++++++++++
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
+   examples
    lte
 
 
