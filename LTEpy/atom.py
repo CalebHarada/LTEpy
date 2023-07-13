@@ -55,8 +55,8 @@ class Atom():
         ii = list(self.levels).index(levii)
         Eii = self.energy[ii]
 
-        boltzfact = np.exp(-Eii/KBOLTZ/temp)
-        return boltzfact
+        bfact = np.exp(-Eii/KBOLTZ/temp)
+        return bfact
     
     def partition_function(self, temp):
         """ Calculate the partition function, the sum of all the Boltzmann factors,
