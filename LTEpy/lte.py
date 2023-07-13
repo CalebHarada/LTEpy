@@ -2,8 +2,8 @@ import abc
 import numpy as np
 import matplotlib.pyplot as plt
 
-from LTEpy.constants import *
-import LTEpy.plot as plot
+from constants import *
+import plot as plot
 
 
 class _LTE(abc.ABC):
