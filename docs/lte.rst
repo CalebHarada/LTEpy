@@ -3,5 +3,7 @@
 Local Thermodynamic Equilibrium
 =========================================
 
-.. automodule:: lte
+.. module:: LTEpy
+
+.. automodule:: LTEpy.lte
    :members:
