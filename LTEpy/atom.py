@@ -28,7 +28,12 @@ class Atom():
         
         """
         self.name = name
+
+
         self.gdegen = gdegen
+
+        if np.any(energy>=0):
+            
         self.energy = energy
 
         if levels is None:
