@@ -14,7 +14,7 @@ See documentation on [readthedocs](https://ltepy.readthedocs.io/en/latest/).
 # Attribution
 
 # Acknowledgements
-This package was development as part of the [code/astro](https://semaphorep.github.io/codeastro/) conference. Special thanks to the code/astro instructors, Sarah Blunt and Matthew Hosek, and Jason Wang, and the teaching assistant overseeing this project, Simon Ko.
+This package was developed at the [code/astro](https://semaphorep.github.io/codeastro/) workshop. Special thanks to the code/astro instructors, Sarah Blunt and Matthew Hosek, and Jason Wang, and the teaching assistant overseeing this project, Simon Ko.
 
 
 
