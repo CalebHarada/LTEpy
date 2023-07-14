@@ -317,6 +317,13 @@ class Boltzmann_Factor(_LTE):
             Atom, contains levels, energy levels, and degeneracies.
 
         """
+
+        # check that temperature is positive
+        if temp == 0: 
+            err = f"{temp=} must be > 0 Kelvin."
+            raise ValueError(err)
+        
+        # set attributes
         self.temp = temp
         self.atom = atom
         self._bfact = None

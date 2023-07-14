@@ -32,7 +32,11 @@ def test_zero_Kelvin():
     """ Make sure the code raises a ValueError if you try to use 0 Kelvin temperature.
     
     """
-    pass
+    hydrogen=atom.Hydrogen(levels=np.arange(1,6))
+    temp = 0 # Kelvin
+    
+    with pytest.raises(ValueError):
+        bfact = lte.Boltzmann_Factor(temp, hydrogen).bfact
 
     
 if __name__ == "__main__":
