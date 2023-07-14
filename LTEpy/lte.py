@@ -351,6 +351,38 @@ class Boltzmann_Factor(_LTE):
                 bfact[ii] = np.float64(np.exp(-(eng)/KBOLTZ/self.temp))
             self._bfact = bfact
         return self._bfact
+    
+    def set_temp(self, temp):
+        """Set temperature.
+
+        Change the temperature of this Boltzmann_Factor LTE object and reset _bfact.
+
+        Args:
+            temp (float): Temperature in K.
+
+        """
+
+        assert temp>0, f"{temp=} must be greater than 0"
+        self.temp = temp
+        
+        # set self._bfact to None so that it is recalculated when next called.
+        self._bfact = None
+
+        
+    
+    def partition_function(self, temp):
+        """ Calculate the partition function, the sum of all the Boltzmann factors,
+        using all levels belonging to the atom.
+        
+        Args:
+            temp (float): Temperature in Kelvin.
+
+        NOTE: Not tested
+        """
+        sum = 0
+        for lev in self.levels:
+            sum += self.boltzmann_factor(lev, temp)
+        return sum
 
 
     def draw_bfact(self, ax, levmin=None, levmax=None, color=None):
