@@ -8,7 +8,9 @@ LTEpy is a python package for calculating and visualizing functions in local the
 # Installation
 
 Install LTEpy with pip using
+
 `pip install LTEpy`
+`pip install -e -r requirements.txt`
 
 # Documentation
 
