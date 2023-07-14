@@ -29,19 +29,30 @@ class Planck(_LTE):
     def __init__(self, temp):
 
         super().__init__(temp)
-        self.temp = temp
+
+        if temp > 0:
+            self.temp = temp
+        elif temp == 0:
+            raise ValueError('Temperature must be greater than 0.')
+        else:
+            raise ValueError('Temperature cannot be negative.')
         
 
     def set_temp(self, temp):
         """Set temperature.
 
-        Changes the temperature of this Planck object.
+        Change the temperature of this Planck LTE object.
 
         Args:
             temp (float): Temperature in K.
         """
 
-        self.temp = temp
+        if temp > 0:
+            self.temp = temp
+        elif temp == 0:
+            raise ValueError('Temperature must be greater than 0.')
+        else:
+            raise ValueError('Temperature cannot be negative.')
 
 
     def compute_B_nu(self, nu):
@@ -200,65 +211,60 @@ class Planck(_LTE):
 
 
 class Maxwell_Boltzmann(_LTE):
-    """ Class for computing the Maxwell Boltzmann distribution for a given particle and temperature
-    
+    """Maxwell-Boltzmann Distribution.
+
+    Class for calculating the Maxwell-Boltzmann Distribution for a system
+    in Local Thermodynamic Equilibrium, given a particle mass.
+
+    Args:
+        temp (float): Temperature in K.
+        mass (float): Particle mass in AMU.
     """
 
     def __init__(self, temp, mass):
-        """ Initialize
-
-        Parameters
-        ----------
-        temp : scalar
-            Temperature in K
-        mass : scale
-            Particle mass in AMU
-
-        """
 
         super().__init__(temp)
-
         self.temp = temp
         self.mass = mass
 
 
     def set_mass(self, mass):
-        """Helper function to set the mass of the particle
+        """Set mass.
 
-        Parameters
-        ----------
-        mass : scalar
-            Particle mass in AMU
-        
+        Change the mass of this Maxwell-Boltzmann LTE object.
+
+        Args:
+            mass (float): Mass in AMU.
         """
 
         self.mass = mass
-
+    
 
     def set_temp(self, temp):
-        """Set the temperature of this Planck object
+        """Set temperature.
 
-        Parameters
-        ----------
-        temp : scalar
-            temperature in Kelvin
-        
+        Change the temperature of this Maxwell-Boltzmann LTE object.
+
+        Args:
+            temp (float): Temperature in K.
         """
 
         self.temp = temp
     
 
     def compute_maxwell_boltzmann(self, speed):
-        """ Calculate the probability density function of a given speed for a particle of given mass
+        """Maxwell-Boltzmann speed distribution.
 
-        Parameters
-        ----------
-        speed : scalar
-            particle speed in cm/s
+        Compute the probabilty density of a particle with a given mass having a given speed.
 
-        
-        f(v) = (m / 2*pi*k*T)^1.5 * 4*pi*v^2 * exp[-m*v^2 / (2*k*T)]
-        
+        .. math::
+            f(v) = \\bigg(\\frac{m}{2 \pi k T}\\bigg)^{3/2} 4 \pi v^2 e^{-m v^2 / 2 k T}
+
+        Args:
+            speed (float or :obj:`np.array`): Speed in cm/s.
+
+        Returns:
+            float or :obj:`np.array`: Probability density s/cm
         """
 
         mass = self.mass * AMU
@@ -268,35 +274,34 @@ class Maxwell_Boltzmann(_LTE):
         return f_v
     
     
-    def plot_fv(self, speed_1, speed_2, N_speed=500, lw=1, ax=None, **kwargs):
-        """ Plot specific intensity B_nu between two frequencies
-        
-        Parameters
-        ----------
-        speed_1 : scalar
-            first speed in cm/s
-        speed_2 : scalar
-            second speed in cm/s
-        N_speed : scalar
-            number of speed points to plot
-        lw : scalar
-            line width for plotting
-        ax : matplotlib axis object
-            option to choose which axis to plot on
-        
+    def plot_fv(self, speed_1, speed_2, N_speed=500, lw=1, ax=None, **ax_kwargs):
+        """Plot the Maxwell-Boltzmann Distribution.
+
+        Plot the distributino of particle speeds defined by the Maxwell-Boltzmann
+        Distribution between two speeds.
+
+        Args:
+            speed_1 (float): First speed in cm/s.
+            speed_2 (float): Second speed in cm/s.
+            N_speed (int, optional): Number of speed points to plot. Defaults to 500.
+            lw (int, optional): Plot line width. Defaults to 1.
+            ax (:obj:`matplotlib.pyplot.Axes`, optional): Matplotlib axis for plotting. Defaults to None.
+            **ax_kwargs: Keyword arguments passed to :obj:`matplotlib.pyplot.Axes` object.
+
+        Returns:
+            :obj:`matplotlib.pyplot.Axes`: Matplotlib axis
         """
 
         speeds = np.linspace(speed_1, speed_2, N_speed)  # define speed array
 
         if not ax:
-            fig, ax = plt.subplots()
+            _, ax = plt.subplots()
 
-        ax.plot(speeds, self.compute_maxwell_boltzmann(speeds), lw=lw, **kwargs)
+        ax.plot(speeds, self.compute_maxwell_boltzmann(speeds), lw=lw, **ax_kwargs)
         ax.set_xlabel("Speed (cm s$^{-1}$)")
         ax.set_ylabel("Probability density (s cm$^{-1}$)")
         
-        if not ax:
-            return fig, ax
+        return ax
 
 
 
@@ -304,29 +309,38 @@ class Boltzmann_Factor(_LTE):
     """ Class for calculating Boltzmann Factor 
     between two energy levels of a given atom.
     
-    TODO: Add subclass, Gibbs factor, that also allows for a mu term.
     """ 
     def __init__(self, temp, atom): # , levjj):
         """ Initialize
 
-        Parameters
-        ----------
-        temp : scalar
-            Temperature in K
-        atom : equations.Atom Object
-            Atom, contains levels, energy levels, and degeneracies.
+        Args:
+            temp (float): Temperature in K
+            atom (:obj:'atom.Atom'): Atom, contains levels, energy levels, and degeneracies.
 
         """
+
+        # check that temperature is positive
+        if temp == 0: 
+            err = f"{temp=} must be > 0 Kelvin."
+            raise ValueError(err)
+        
+        # set attributes
         self.temp = temp
         self.atom = atom
         self._bfact = None
 
     @property
     def bfact(self):
-        """ Calculate probability ratio of probabilities p_i/p_j between energy levels i and j.
-     
+        """ Boltzmann factor
+        
+        Calculate Boltzmann factor for each energy level.
 
-        factor = exp[(-E_i)/kT]
+        Returns:
+            _bfact (:obj:`np.array`) : Boltzmann factor
+
+     
+        .. math::
+            \\beta(n, T) = \exp \\bigg(\\frac{-E_n}{k_B T}\\bigg)
 
         """
         if self._bfact is None:
@@ -340,6 +354,18 @@ class Boltzmann_Factor(_LTE):
 
 
     def draw_bfact(self, ax, levmin=None, levmax=None, color=None):
+        """ Draw the Boltzmann factors
+        
+        Plot the Boltzmann factors for each energy level at a fixed temperature, 
+        and return the line handle.
+        
+        Args:
+            levmin (float or None): Lowest level to plot.
+            levman (float or None): Highest level to plot.
+            
+        Returns:
+            :obj:'matplotlib.Line2D.Line': Line handle
+        """
         if levmin is not None:
             iimin = list(self.atom.levels).index[levmin]
         else:
@@ -359,6 +385,19 @@ class Boltzmann_Factor(_LTE):
         return hh,
 
     def plot_bfact(self, levmin=None, levmax=None,):
+        """ Plot the Boltzmann factor 
+        
+        Plot the Boltzmann factor for each energy level at a fixed temperature.
+
+        Args:
+            levmin (float or None): Lowest level to plot.
+            levman (float or None): Highest level to plot.
+            
+        Returns:
+            :obj:`matplotlib.pyplot.Figure`: Matplotlib figure
+            :obj:'matplotlib.Line2D.Line': Line handle
+        
+        """
 
         fig, ax = plot.figax(xscale='linear')
         hh, = self.draw_bfact(ax, levmin, levmax)
