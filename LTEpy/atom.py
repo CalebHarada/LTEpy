@@ -15,19 +15,16 @@ class Atom():
         Degeneracy of each energy level
     """
 
-    def __init__(self, name, gdegen, energy, levels=None):
+    def __init__(self, gdegen, energy, levels=None):
         """ 
         Parameters
         ----------
-        name : str
-            name of atom
         degen : dict
             degeneracies
         elevels : dict
             energy levels
         
         """
-        self.name = name
 
         if np.any(gdegen<=0):
             raise ValueError(f"All {gdegen=} must be positive.")
@@ -81,18 +78,15 @@ class Hydrogen(Atom):
     
     """
 
-    def __init__(self, name='hydrogen', levels=np.arange(1,11)):
+    def __init__(self, levels=np.arange(1,11)):
         """ 
         Parameters
         ----------
-        name : str
-            name of atom
         levels : NDarray of integers
             Levels at which to calculate energy and degeneracy, 
             default 1 to 10.
         
         """
-        self.name = name
         self.levels = levels
         self.gdegen = self.gdegen_at_level(levels)
         self.energy = self.energy_at_level(levels)
