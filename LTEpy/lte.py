@@ -309,17 +309,13 @@ class Boltzmann_Factor(_LTE):
     """ Class for calculating Boltzmann Factor 
     between two energy levels of a given atom.
     
-    TODO: Add subclass, Gibbs factor, that also allows for a mu term.
     """ 
     def __init__(self, temp, atom): # , levjj):
         """ Initialize
 
-        Parameters
-        ----------
-        temp : scalar
-            Temperature in K
-        atom : equations.Atom Object
-            Atom, contains levels, energy levels, and degeneracies.
+        Args:
+            temp (float): Temperature in K
+            atom (:obj:'atom.Atom'): Atom, contains levels, energy levels, and degeneracies.
 
         """
 
@@ -335,10 +331,16 @@ class Boltzmann_Factor(_LTE):
 
     @property
     def bfact(self):
-        """ Calculate probability ratio of probabilities p_i/p_j between energy levels i and j.
-     
+        """ Boltzmann factor
+        
+        Calculate Boltzmann factor for each energy level.
 
-        factor = exp[(-E_i)/kT]
+        Returns:
+            _bfact (:obj:`np.array`) : Boltzmann factor
+
+     
+        .. math::
+            \\beta(n, T) = \exp \\bigg(\\frac{-E_n}{k_B T}\\bigg)
 
         """
         if self._bfact is None:
@@ -352,6 +354,18 @@ class Boltzmann_Factor(_LTE):
 
 
     def draw_bfact(self, ax, levmin=None, levmax=None, color=None):
+        """ Draw the Boltzmann factors
+        
+        Plot the Boltzmann factors for each energy level at a fixed temperature, 
+        and return the line handle.
+        
+        Args:
+            levmin (float or None): Lowest level to plot.
+            levman (float or None): Highest level to plot.
+            
+        Returns:
+            :obj:'matplotlib.Line2D.Line': Line handle
+        """
         if levmin is not None:
             iimin = list(self.atom.levels).index[levmin]
         else:
@@ -371,6 +385,19 @@ class Boltzmann_Factor(_LTE):
         return hh,
 
     def plot_bfact(self, levmin=None, levmax=None,):
+        """ Plot the Boltzmann factor 
+        
+        Plot the Boltzmann factor for each energy level at a fixed temperature.
+
+        Args:
+            levmin (float or None): Lowest level to plot.
+            levman (float or None): Highest level to plot.
+            
+        Returns:
+            :obj:`matplotlib.pyplot.Figure`: Matplotlib figure
+            :obj:'matplotlib.Line2D.Line': Line handle
+        
+        """
 
         fig, ax = plot.figax(xscale='linear')
         hh, = self.draw_bfact(ax, levmin, levmax)
