@@ -3,4 +3,9 @@
 Installation
 =============
 
-Use pip
+``LTEpy`` is pip installable! 
+
+.. code-block:: console
+    :linenos:
+
+    $ pip install LTEpy

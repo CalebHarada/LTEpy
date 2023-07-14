@@ -6,11 +6,10 @@
 LTEpy
 =======
 
-Hello! Welcome to the documentation for ``LTEpy``, a Python package for calculating
+Hello! Welcome to the documentation for ``LTEpy``, a convenient Python package for calculating
 and visualizing properties of a system in (local) thermodynamic equilibrium, or LTE.
 
 ``LTEpy`` currently supports the following basic LTE calculations:
-
 * The Planck Function for black body radiation
 * The Maxwell Boltzmann Distribution
 * The Boltzmann Factors for an atom's energy levels
@@ -31,7 +30,6 @@ Changelog:
 +++++++++++
 
 **1.0.0 (2023-07-15)**
-
 - Initial release
 
 
