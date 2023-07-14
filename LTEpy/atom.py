@@ -7,22 +7,17 @@ class Atom():
     """ Class for storing energy levels and degeneracies for any atom.
     
     Attributes : 
-    levels : NDarray of ints
-        Energy levels
-    energy : NDarray of floats
-        Energy of each energy level, in ergs
-    gdegen : NDarray of ints
-        Degeneracy of each energy level
+        levels (NDarray of ints) energy levels
+        energy (NDarray of floats): Energy of each energy level, in ergs
+        gdegen (NDarray of ints): Degeneracy of each energy level
     """
 
     def __init__(self, gdegen, energy, levels=None):
         """ 
-        Parameters
-        ----------
-        degen : dict
-            degeneracies
-        elevels : dict
-            energy levels
+        Args:
+            gdegen (array): degeneracies.
+            energy (array): energy at each level.
+            levels (array or None): number of each energy level corresponding to gdegen and energy.
         
         """
 
@@ -41,19 +36,16 @@ class Atom():
     
     def boltzmann_factor(self, levii, temp):
         """ Calculate the Boltzmann factor for a given energy level.
-        gi
-        Parameters
-        ----------
-        levii : int
-            Energy level, ii. Must be included in levels
-        temp : arraylike
+        
+        Args:
+            levii (int): Energy level, ii. Must be included in levels.
+            temp (float): Temperature in Kelvin.
 
 
-        Returns
-        -------
-        boltzfact : scalar
-            Boltzmann factor, proportional to the probability of being in state ii
-
+        Returns:
+            bfact (float): Boltzmann factor, proportional to the probability of being in state ii.
+        
+        NOTE: Not tested
         """
         ii = list(self.levels).index(levii)
         Eii = self.energy[ii]
@@ -65,7 +57,10 @@ class Atom():
         """ Calculate the partition function, the sum of all the Boltzmann factors,
         using all levels belonging to the atom.
         
-        
+        Args:
+            temp (float): Temperature in Kelvin.
+
+        NOTE: Not tested
         """
         sum = 0
         for lev in self.levels:
@@ -74,17 +69,14 @@ class Atom():
 
 
 class Hydrogen(Atom):
-    """ Class for a hydrogen atom, including hydrogen-specific energy level functions.
+    """ Class for hydrogen atoms.
     
     """
 
     def __init__(self, levels=np.arange(1,11)):
         """ 
-        Parameters
-        ----------
-        levels : NDarray of integers
-            Levels at which to calculate energy and degeneracy, 
-            default 1 to 10.
+        Args:
+            levels (NDarray of integers): Levels at which to calculate energy and degeneracy, default 1 to 10.
         
         """
         self.levels = levels
@@ -94,36 +86,32 @@ class Hydrogen(Atom):
     def energy_at_level(self, levels):
         """ Calculate the energy at each level of a hydrogen atom.
 
-        Parameters
-        ----------
-        levels : arraylike
-            Energy level(s), n
+        Args: 
+            levels (arraylike of integers): Energy level(s).
 
         Returns
-        -------
-        energy : arraylike
-            Energy of each energy level, in cgs units (ergs)
+            energy (arraylike): Energy at (each) level, in ergs.
+        
+        ..math::
+            E_n = (-13.6\mathrm{eV}) / n^2
 
-        TODO: Use more precise/generic version of this eq. using Z and rydberg const
-        E = -13.6 eV / n^2
+        TODO: Use more precise/generalizable version of this eq. 
         """
+
         energy = -13.6*EVOLT/levels**2
         return energy
     
     def gdegen_at_level(self, levels):
         """ Calculate the degeneracy at each level of a hydrogen atom.
 
-        Parameters
-        ----------
-        level : arraylike
-            Energy level(s), n
+        Args:
+            level (arraylike of integers): Energy level(s)
 
-        Returns
-        -------
-        gdegen : arraylike
-            Degeneracy of each energy level
+        Returns:
+            gdegen (arraylike): Degeneracy of each energy level
         
-        g = 2 n^2
+        .. math::
+            g(n) = 2 n^2
         """
         gdegen = 2*levels**2
         return gdegen
