@@ -308,6 +308,14 @@ class Maxwell_Boltzmann(_LTE):
 class Boltzmann_Factor(_LTE): 
     """ Class for calculating Boltzmann Factor 
     between two energy levels of a given atom.
+
+    Attributes:
+        temp (float): temperature in K
+        atom (:obj: LTEpy.atom.Atom): 
+    
+    Properties:
+        bfact (:obj: 'np.array'): Boltzmann factors of each energy level
+        pfunc (float): Partition function using all energy levels provided.
     
     """ 
     def __init__(self, temp, atom): # , levjj):
@@ -328,6 +336,7 @@ class Boltzmann_Factor(_LTE):
         self.temp = temp
         self.atom = atom
         self._bfact = None
+        self._pfunc = None
 
     @property
     def bfact(self):
@@ -351,6 +360,24 @@ class Boltzmann_Factor(_LTE):
                 bfact[ii] = np.float64(np.exp(-(eng)/KBOLTZ/self.temp))
             self._bfact = bfact
         return self._bfact
+            
+    @property
+    def pfunc(self):
+        """ Partition Function
+        
+        Calculate the partition function, the sum of all the Boltzmann factors,
+        using all levels belonging to the atom.
+        
+        Args:
+            temp (float): Temperature in Kelvin.
+
+        .. math:: 
+            \sum_n \\beta(n, T)
+        """
+        if self._pfunc is None:
+            pfunc = np.sum(self.bfact)
+            self._pfunc = pfunc
+        return self._pfunc
     
     def set_temp(self, temp):
         """Set temperature.
@@ -368,21 +395,7 @@ class Boltzmann_Factor(_LTE):
         # set self._bfact to None so that it is recalculated when next called.
         self._bfact = None
 
-        
-    
-    def partition_function(self, temp):
-        """ Calculate the partition function, the sum of all the Boltzmann factors,
-        using all levels belonging to the atom.
-        
-        Args:
-            temp (float): Temperature in Kelvin.
 
-        NOTE: Not tested
-        """
-        sum = 0
-        for lev in self.levels:
-            sum += self.boltzmann_factor(lev, temp)
-        return sum
 
 
     def draw_bfact(self, ax, levmin=None, levmax=None, color=None):
