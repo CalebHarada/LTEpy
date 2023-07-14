@@ -394,6 +394,7 @@ class Boltzmann_Factor(_LTE):
         
         # set self._bfact to None so that it is recalculated when next called.
         self._bfact = None
+        self._pfunc = None
 
 
 
