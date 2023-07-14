@@ -26,5 +26,4 @@ setup(
     license="MIT",
     url="https://github.com/CalebHarada/LTEpy",
     install_requires=get_requires()
-
 )
