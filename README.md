@@ -1,6 +1,6 @@
 # LTEpy
 
-LTEpy is a python package for calculating and visualizing functions in local thermodynamic equilibrium, including
+LTEpy is a python package for calculating and visualizing functions in local thermodynamic equilibrium, including:
 * The Planck Function for black body radiation
 * The Maxwell Boltzmann Distribution
 * The Boltzmann Factors for an atom's energy levels
@@ -14,7 +14,8 @@ See documentation on [readthedocs](https://ltepy.readthedocs.io/en/latest/).
 # Attribution
 
 # Acknowledgements
-Code/astro
+This package was developed at the [code/astro](https://semaphorep.github.io/codeastro/) workshop. Special thanks to the code/astro instructors, Sarah Blunt, Matthew Hosek, and Jason Wang, and the teaching assistant overseeing this project, Simon Ko.
+
 
 
 

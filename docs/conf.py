@@ -12,7 +12,7 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('./../LTEpy'))
+sys.path.insert(0, os.path.abspath('./..'))
 
 
 # -- Project information -----------------------------------------------------
@@ -33,7 +33,8 @@ root_doc = 'index'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.napoleon'
+    'sphinx.ext.napoleon',
+    'nbsphinx'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
