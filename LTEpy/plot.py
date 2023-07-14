@@ -2,8 +2,8 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 
-ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-plt.style.use(ROOT_DIR + '/sty/custom.mplstyle')   # avoid dark backgrounds from dark theme vscode
+# ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+# plt.style.use(ROOT_DIR + '/custom.mplstyle')   # avoid dark backgrounds from dark theme vscode
 # plt.rcParams['axes.grid'] = True
 # plt.rcParams['grid.alpha'] = 0.15
 # plt.rcParams["mathtext.fontset"] = "cm"

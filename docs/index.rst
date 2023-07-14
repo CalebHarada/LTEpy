@@ -30,6 +30,14 @@ User Guide:
 Changelog:
 +++++++++++
 
+**1.0.2 (2023-07-15)**
+
+- Fixed plotting style sheet bug
+
+**1.0.1 (2023-07-15)**
+
+- Fixed install requirements bug
+
 **1.0.0 (2023-07-15)**
 
 - Initial release
