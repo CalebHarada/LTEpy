@@ -12,8 +12,8 @@ User Guide:
 .. toctree::
    :maxdepth: 2
 
+   installation
    examples
-   lte
 
 
 Indices and tables
