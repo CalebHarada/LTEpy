@@ -17,6 +17,7 @@ See documentation and tutorials on [readthedocs](https://ltepy.readthedocs.io/en
 # Attribution
 
 For attribution, cite the [LTEpy zenodo](https://zenodo.org/record/8139888).
+
 LTEpy uses an [MIT license](LICENSE).
 
 # Acknowledgements
