@@ -35,7 +35,7 @@ class Atom():
         self.energy = energy
 
         if levels is None:
-            levels = np.arange(1,len(gdegen))
+            levels = np.arange(1,len(gdegen)+1)
 
         self.levels = levels
     
