@@ -24,6 +24,7 @@ setup(
     author="Gardiner, E. C., Harada, C.",
     author_email="ecg@berkeley.edu, charada@berkeley.edu",
     license="MIT",
-    url="https://github.com/CalebHarada/LTEpy"
+    url="https://github.com/CalebHarada/LTEpy",
+    install_requires=get_requires()
 
 )
