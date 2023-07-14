@@ -14,6 +14,7 @@ User Guide:
 
    installation
    examples
+   api
 
 
 Indices and tables
