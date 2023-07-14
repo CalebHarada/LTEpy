@@ -6,6 +6,14 @@ Installation
 ``LTEpy`` is pip installable! 
 
 .. code-block:: console
-    :linenos:
 
     $ pip install LTEpy
+
+
+To test your installation, ``cd`` into the root directory of ``LTEpy`` and run
+
+.. code-block:: console
+
+    $ py.test
+
+
