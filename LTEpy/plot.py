@@ -2,8 +2,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-
-plt.style.use('../styles/custom.mplstyle')   # avoid dark backgrounds from dark theme vscode
+import sys
+sys.path.append('./..')
+plt.style.use('styles/custom.mplstyle')   # avoid dark backgrounds from dark theme vscode
 # plt.rcParams['axes.grid'] = True
 # plt.rcParams['grid.alpha'] = 0.15
 # plt.rcParams["mathtext.fontset"] = "cm"
